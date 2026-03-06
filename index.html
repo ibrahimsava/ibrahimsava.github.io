@@ -8,39 +8,21 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #050A18;
-    --bg2: #080F22;
-    --bg3: #0B1530;
-    --electric: #1A6FFF;
-    --electric-bright: #4D94FF;
-    --electric-glow: #0057FF;
-    --cyan: #00D4FF;
-    --cyan-dim: #0099BB;
-    --white: #F0F4FF;
-    --muted: #6B7A99;
-    --line: rgba(26,111,255,0.18);
-    --line2: rgba(0,212,255,0.12);
+    --bg: #050A18; --bg2: #080F22; --bg3: #0B1530;
+    --electric: #1A6FFF; --electric-bright: #4D94FF; --electric-glow: #0057FF;
+    --cyan: #00D4FF; --cyan-dim: #0099BB;
+    --white: #F0F4FF; --muted: #6B7A99;
+    --line: rgba(26,111,255,0.18); --line2: rgba(0,212,255,0.12);
   }
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--white); font-family: 'DM Mono', monospace; font-weight: 300; overflow-x: hidden; cursor: none; }
-
-  /* CURSOR */
   .cursor { position:fixed;top:0;left:0;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .08s ease;mix-blend-mode:screen; }
   .cursor-ring { position:fixed;top:0;left:0;width:36px;height:36px;border:1px solid rgba(0,212,255,.4);border-radius:50%;pointer-events:none;z-index:9998;transition:transform .18s ease,width .3s,height .3s; }
-
-  /* GRID BG */
-  body::after {
-    content:'';position:fixed;inset:0;
-    background-image: linear-gradient(rgba(26,111,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(26,111,255,.04) 1px,transparent 1px);
-    background-size: 60px 60px;
-    pointer-events:none;z-index:0;
-  }
-  /* GLOW BG */
+  body::after { content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(26,111,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(26,111,255,.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0; }
   .glow-orb { position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0; }
   .glow-orb-1 { width:600px;height:600px;background:rgba(26,111,255,.12);top:-100px;right:-100px; }
   .glow-orb-2 { width:400px;height:400px;background:rgba(0,212,255,.08);bottom:10%;left:-100px; }
 
-  /* NAV */
   nav { position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 4rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,10,24,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--line); }
   .nav-logo { font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:.05em;text-decoration:none;background:linear-gradient(135deg,var(--electric-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent; }
   .nav-links { display:flex;gap:2.5rem;list-style:none; }
@@ -49,7 +31,6 @@
   .nav-links a:hover { color:var(--white); }
   .nav-links a:hover::after { transform:scaleX(1);transform-origin:left; }
 
-  /* HERO */
   #hero { min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 4rem;position:relative;overflow:hidden;z-index:1; }
   .hero-left { position:relative;z-index:2; }
   .hero-eyebrow { font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.8rem;display:flex;align-items:center;gap:1rem; }
@@ -64,7 +45,6 @@
   .btn-ghost { font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.6rem;border:1px solid var(--line);padding:.85rem 1.8rem;transition:color .3s,border-color .3s; }
   .btn-ghost:hover { color:var(--cyan);border-color:var(--cyan-dim); }
 
-  /* HERO RIGHT — PHOTO */
   .hero-right { position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-end;gap:2rem; }
   .photo-wrap { position:relative;width:300px;height:380px; }
   .photo-hex-border { position:absolute;inset:-3px;background:linear-gradient(135deg,var(--electric),var(--cyan),var(--electric));border-radius:2px;z-index:0;animation:borderGlow 3s ease-in-out infinite alternate; }
@@ -85,7 +65,6 @@
   .avail-dot { width:7px;height:7px;border-radius:50%;background:#00FF88;box-shadow:0 0 10px #00FF88;animation:pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)} }
 
-  /* SECTIONS */
   section { padding:7rem 4rem;position:relative;z-index:1; }
   .section-label { font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:var(--cyan);margin-bottom:1rem;display:flex;align-items:center;gap:1rem; }
   .section-label::before { content:'';width:30px;height:1px;background:linear-gradient(to right,var(--electric),var(--cyan)); }
@@ -93,7 +72,6 @@
   .section-title em { font-style:normal;background:linear-gradient(135deg,var(--electric-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent; }
   .section-divider { width:60px;height:2px;background:linear-gradient(to right,var(--electric),var(--cyan),transparent);margin:2rem 0 3.5rem; }
 
-  /* SKILLS */
   #skills { background:var(--bg2); }
   .skills-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem; }
   .skill-cat { background:var(--bg);padding:2.5rem;transition:background .3s; }
@@ -107,7 +85,6 @@
   .skill-tag { font-size:.6rem;letter-spacing:.1em;padding:.3rem .8rem;border:1px solid var(--line);color:var(--muted);transition:border-color .3s,color .3s,box-shadow .3s; }
   .skill-tag:hover { border-color:var(--electric);color:var(--electric-bright);box-shadow:0 0 12px rgba(26,111,255,.2); }
 
-  /* DATA TOOLS */
   #data { background:var(--bg); }
   .data-tools { display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem; }
   .data-tool { background:var(--bg2);padding:2rem 1.5rem;text-align:center;transition:background .3s,box-shadow .3s;position:relative;overflow:hidden; }
@@ -118,7 +95,6 @@
   .data-tool-name { font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.4rem; }
   .data-tool-desc { font-size:.58rem;letter-spacing:.08em;color:var(--muted);line-height:1.7; }
 
-  /* PROJECTS */
   #projects { background:var(--bg2); }
   .projects-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem; }
   .project-card { background:var(--bg);padding:3rem;position:relative;overflow:hidden;cursor:pointer;transition:background .4s; }
@@ -135,7 +111,6 @@
   .project-link { font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .3s,text-shadow .3s; }
   .project-link:hover { gap:1rem;text-shadow:0 0 12px var(--cyan); }
 
-  /* TIMELINE */
   #timeline { background:var(--bg); }
   .timeline-wrap { position:relative;margin-top:3rem;padding-left:3rem; }
   .timeline-wrap::before { content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--electric),var(--cyan-dim),transparent); }
@@ -149,7 +124,6 @@
   .timeline-desc { font-size:.7rem;line-height:1.9;color:rgba(240,244,255,.45);max-width:560px; }
   .timeline-badge { display:inline-block;margin-top:1rem;font-size:.55rem;letter-spacing:.15em;padding:.3rem .8rem;border:1px solid rgba(0,255,136,.35);color:#00FF88;box-shadow:0 0 8px rgba(0,255,136,.1); }
 
-  /* CONTACT */
   #contact { background:var(--bg2);text-align:center;display:flex;flex-direction:column;align-items:center; }
   .contact-inner { max-width:640px; }
   .contact-email { font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;background:linear-gradient(135deg,var(--electric-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;display:block;margin:2rem 0;transition:filter .3s; }
@@ -198,7 +172,7 @@
   <div class="hero-left">
     <div class="hero-eyebrow">Data Scientist · Développeur Fullstack</div>
     <h1 class="hero-name">Ibrahim<br><span class="last">SAVADOGO</span></h1>
-    <p class="hero-title">Data Science · Django · Flutter </p>
+    <p class="hero-title">Data Science · Django · Flutter</p>
     <p class="hero-desc">Je transforme la donnée brute en insights actionnables et en produits digitaux robustes. De l'analyse ML en production aux applications web et mobiles performantes.</p>
     <div class="hero-ctas">
       <a href="#contact" class="btn-primary">Me contacter</a>
@@ -238,7 +212,7 @@
         <li class="skill-item">Power BI / Dataviz <div class="skill-bar-wrap"><div class="skill-bar" data-w="90"></div></div></li>
         <li class="skill-item">SQL / MySQL <div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></li>
         <li class="skill-item">HPC <div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></li>
-          <li class="skill-item">Excel avancé <div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></li>
+        <li class="skill-item">Excel avancé <div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></li>
         <li class="skill-item">Machine Learning <div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></li>
       </ul>
     </div>
@@ -246,11 +220,11 @@
       <div class="skill-cat-title">Développement Web</div>
       <ul class="skill-list">
         <li class="skill-item">Django / Python <div class="skill-bar-wrap"><div class="skill-bar" data-w="92"></div></div></li>
-        <li class="skill-item">Boostrap <div class="skill-bar-wrap"><div class="skill-bar" data-w="92"></div></div></li>
+        <li class="skill-item">Bootstrap <div class="skill-bar-wrap"><div class="skill-bar" data-w="92"></div></div></li>
         <li class="skill-item">Django REST Framework <div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></li>
         <li class="skill-item">HTML / CSS / JS <div class="skill-bar-wrap"><div class="skill-bar" data-w="82"></div></div></li>
         <li class="skill-item">APIs RESTful <div class="skill-bar-wrap"><div class="skill-bar" data-w="90"></div></div></li>
-        <li class="skill-item">Sqlite/ MySQL/ XAMP <div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></li>
+        <li class="skill-item">SQLite / MySQL / XAMPP <div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></li>
       </ul>
     </div>
     <div class="skill-cat">
@@ -268,6 +242,7 @@
 </section>
 
 <section id="data">
+  <div class="section-label fade-in">Data & Intelligence Artificielle</div>
   <h2 class="section-title fade-in">Outils & <em>Expertise Data</em></h2>
   <div class="section-divider fade-in"></div>
   <div class="data-tools fade-in">
@@ -283,10 +258,51 @@
   <h2 class="section-title fade-in">Projets <em>Sélectionnés</em></h2>
   <div class="section-divider fade-in"></div>
   <div class="projects-grid fade-in">
-    <div class="project-card"><div class="project-num">01</div><div class="project-type">Data Science · Prédiction</div><h3 class="project-title">Modèle de Prédiction des Ventes</h3><p class="project-desc">Pipeline ML complet pour la prévision des ventes retail.  XGBoost, LSTM et dashboard Power BI pour la visualisation des résultats.</p><div class="project-stack"><span class="project-tag">Python</span><span class="project-tag">Pandas</span><span class="project-tag">XGBoost</span></div></div>
-    <div class="project-card"><div class="project-num">02</div><div class="project-type">Web · Django · API</div><h3 class="project-title">Plateforme de Gestion Métier</h3><p class="project-desc">Application web full-stack Django avec authentification, API REST, interface admin personnalisée et intégration MySQL. La mise en place d'une application de gestion scolaire, Une application de ecommerce</p><div class="project-stack"><span class="project-tag">Django</span><span class="project-tag">Python</span><span class="project-tag">MySQL</span><span class="project-tag">REST API</span></div></div>
-    <div class="project-card"><div class="project-num">03</div><div class="project-type">Mobile · Flutter</div><h3 class="project-title">Application Mobile Cross-Platform</h3><p class="project-desc">Application Flutter multiplateforme (Android) avec interface soignée, sync temps réel et consommation d'APIs REST Django. Application pour le monitoring des grandeurs physico chmique du sol en temps reel</p><div class="project-stack"><span class="project-tag">Flutter</span><span class="project-tag">Dart</span><span class="project-tag">Django API</span><span class="project-tag">MySQL</span></div></div>
-    <div class="project-card"><div class="project-num">04</div><div class="project-type">Data Viz · Business Intelligence</div><h3 class="project-title">Dashboard BI & Reporting Automatisé</h3><p class="project-desc">Tableau de bord Power BI connecté à MySQL avec actualisation automatique, suivi KPIs et analyses pour la prise de décision.</p><div class="project-stack"><span class="project-tag">Power BI</span><span class="project-tag">MySQL</span><span class="project-tag">Python</span><span class="project-tag">DAX</span></div></div>
+
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-type">ERP · Data Science · Machine Learning</div>
+      <h3 class="project-title">Pipeline ERP Automatisé<br>Python + MySQL + ML</h3>
+      <p class="project-desc">Pipeline complet d'automatisation de données couvrant Ventes, Finance et Logistique. XGBoost, LSTM, 3 modèles ML (régression, K-Means, Isolation Forest), 10 graphiques auto-générés et rapport PDF automatique. R² > 0.85 sur les prévisions de ventes.</p>
+      <div class="project-stack">
+        <span class="project-tag">Python</span><span class="project-tag">MySQL</span><span class="project-tag">Scikit-learn</span><span class="project-tag">Pandas</span><span class="project-tag">ReportLab</span><span class="project-tag">Matplotlib</span>
+      </div>
+      <a href="https://github.com/ibrahimsava/erp-automatisation-python-ml" target="_blank" class="project-link">Voir le projet →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-type">Web · Django · Gestion Scolaire & E-commerce</div>
+      <h3 class="project-title">Plateforme de Gestion<br>Scolaire & Métier</h3>
+      <p class="project-desc">Application web full-stack Django avec authentification, API REST, interface admin personnalisée et intégration MySQL. Inclut une application de gestion scolaire et une application e-commerce.</p>
+      <div class="project-stack">
+        <span class="project-tag">Django</span><span class="project-tag">Python</span><span class="project-tag">MySQL</span><span class="project-tag">REST API</span><span class="project-tag">Bootstrap</span>
+      </div>
+      <a href="https://github.com/ibrahimsava/App_gestion_school" target="_blank" class="project-link">Voir le projet →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-type">Mobile · Flutter · IoT</div>
+      <h3 class="project-title">Application Mobile<br>Monitoring Sol en Temps Réel</h3>
+      <p class="project-desc">Application Flutter multiplateforme (Android) avec interface soignée, sync temps réel et consommation d'APIs REST Django. Monitoring des grandeurs physico-chimiques du sol en temps réel.</p>
+      <div class="project-stack">
+        <span class="project-tag">Flutter</span><span class="project-tag">Dart</span><span class="project-tag">Django API</span><span class="project-tag">MySQL</span>
+      </div>
+      <a href="https://github.com/ibrahimsava/site_degestions_des_employes" target="_blank" class="project-link">Voir le projet →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-type">Data Viz · Business Intelligence</div>
+      <h3 class="project-title">Dashboard BI<br>& Reporting Automatisé</h3>
+      <p class="project-desc">Tableau de bord Power BI connecté à MySQL avec actualisation automatique, suivi KPIs et analyses pour la prise de décision.</p>
+      <div class="project-stack">
+        <span class="project-tag">Power BI</span><span class="project-tag">MySQL</span><span class="project-tag">Python</span><span class="project-tag">DAX</span>
+      </div>
+      <a href="https://github.com/ibrahimsava" target="_blank" class="project-link">Voir le projet →</a>
+    </div>
+
   </div>
 </section>
 
@@ -295,10 +311,35 @@
   <h2 class="section-title fade-in">Expérience &amp; <em>Formation</em></h2>
   <div class="section-divider fade-in"></div>
   <div class="timeline-wrap">
-    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2023 — Présent</div><h3 class="timeline-company">Poste actuel</h3><div class="timeline-role"> Stagaire en Data Scientist · Développeur Full-Stack </div><p class="timeline-desc"> Développement Django et Flutter, analyses Power BI.</p><span class="timeline-badge">Poste actuel</span></div>
-    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2021 — 2023</div><h3 class="timeline-company">Expérience Professionnelle</h3><div class="timeline-role">Développeur Python · Data Analyst</div><p class="timeline-desc">Développement outils d'analyse, automatisation, applications Django et reporting Power BI.</p></div>
-    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2019 — 2021</div><h3 class="timeline-company">Formation Supérieure</h3><div class="timeline-role">Ingénierie Informatique · Data Science</div><p class="timeline-desc">Spécialisation en analyse de données, bases de données, développement logiciel et statistiques appliquées.</p></div>
-    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Certifications</div><h3 class="timeline-company">Formations continues</h3><div class="timeline-role">Power BI · Python · Django · Flutter</div><p class="timeline-desc">Formation continue en Data Science, Django REST et développement mobile Flutter.</p></div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2023 — Présent</div>
+      <h3 class="timeline-company">Poste actuel</h3>
+      <div class="timeline-role">Stagiaire en Data Science · Développeur Full-Stack</div>
+      <p class="timeline-desc">Développement Django et Flutter, analyses Power BI.</p>
+      <span class="timeline-badge">Poste actuel</span>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2021 — 2023</div>
+      <h3 class="timeline-company">Expérience Professionnelle</h3>
+      <div class="timeline-role">Développeur Python · Data Analyst</div>
+      <p class="timeline-desc">Développement outils d'analyse, automatisation, applications Django et reporting Power BI.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2019 — 2021</div>
+      <h3 class="timeline-company">Formation Supérieure</h3>
+      <div class="timeline-role">Ingénierie Informatique · Data Science</div>
+      <p class="timeline-desc">Spécialisation en analyse de données, bases de données, développement logiciel et statistiques appliquées.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">Certifications</div>
+      <h3 class="timeline-company">Formations continues</h3>
+      <div class="timeline-role">Power BI · Python · Django · Flutter</div>
+      <p class="timeline-desc">Formation continue en Data Science, Django REST et développement mobile Flutter.</p>
+    </div>
   </div>
 </section>
 
@@ -308,16 +349,17 @@
     <h2 class="section-title fade-in" style="text-align:center;">Travaillons <em>Ensemble</em></h2>
     <div class="section-divider fade-in" style="margin:2rem auto;"></div>
     <p class="fade-in" style="font-size:.75rem;line-height:1.9;color:rgba(240,244,255,.45);">Disponible pour des missions Data Science, développement Django, Flutter ou analyses Power BI.</p>
-    <a href="mailto:ibrahim.savadogo@email.com" class="contact-email fade-in">savadogoibrahim0915@gmail.com</a>
+    <a href="mailto:savadogoibrahim0915@gmail.com" class="contact-email fade-in">savadogoibrahim0915@gmail.com</a>
     <ul class="social-links fade-in">
-      <li><a href="https://github.com/ibrahimsava" target="_blank">GitHub</a></li><><a href="https://www.linkedin.com/in/ibrahim-savadogo-70063128a" target="_blank">LinkedIn</a></li>
+      <li><a href="https://github.com/ibrahimsava" target="_blank">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/ibrahim-savadogo-70063128a" target="_blank">LinkedIn</a></li>
     </ul>
-    <a href="CV.pdf" class="cv-download fade-in">↓ Télécharger mon CV</a>
+    <a href="CV.pdf" download class="cv-download fade-in">↓ Télécharger mon CV</a>
   </div>
 </section>
 
 <footer>
-  <span>© 2025 Ibrahim SAVADOGO</span>
+  <span>© 2026 Ibrahim SAVADOGO</span>
   <span>Data Scientist · Développeur</span>
 </footer>
 
