@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ibrahim SAVADOGO — Data Scientist & Développeur</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #050A18; --bg2: #080F22; --bg3: #0B1530;
+    --electric: #1A6FFF; --electric-bright: #4D94FF; --electric-glow: #0057FF;
+    --cyan: #00D4FF; --cyan-dim: #0099BB;
+    --white: #F0F4FF; --muted: #6B7A99;
+    --line: rgba(26,111,255,0.18); --line2: rgba(0,212,255,0.12);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--white); font-family: 'DM Mono', monospace; font-weight: 300; overflow-x: hidden; cursor: none; }
+  .cursor { position:fixed;top:0;left:0;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .08s ease;mix-blend-mode:screen; }
+  .cursor-ring { position:fixed;top:0;left:0;width:36px;height:36px;border:1px solid rgba(0,212,255,.4);border-radius:50%;pointer-events:none;z-index:9998;transition:transform .18s ease,width .3s,height .3s; }
+  body::after { content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(26,111,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(26,111,255,.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0; }
+  .glow-orb { position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0; }
+  .glow-orb-1 { width:600px;height:600px;background:rgba(26,111,255,.12);top:-100px;right:-100px; }
+  .glow-orb-2 { width:400px;height:400px;background:rgba(0,212,255,.08);bottom:10%;left:-100px; }
+
+  /* ── LANGUAGE TOGGLE ── */
+  .lang-toggle {
+    display:flex;align-items:center;gap:.5rem;
+    background:rgba(26,111,255,.12);
+    border:1px solid var(--line);
+    padding:.35rem .7rem;
+    cursor:pointer;
+    transition:background .3s,border-color .3s,box-shadow .3s;
+    position:relative;
+  }
+  .lang-toggle:hover { background:rgba(26,111,255,.22);border-color:var(--electric);box-shadow:0 0 14px rgba(26,111,255,.3); }
+  .lang-flag { font-size:.85rem;line-height:1; }
+  .lang-label { font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--white);font-family:'DM Mono',monospace;font-weight:500; }
+  .lang-arrow { font-size:.65rem;color:var(--cyan);transition:transform .3s; }
+  .lang-toggle.switching .lang-arrow { transform:rotate(180deg); }
+  .lang-badge {
+    position:absolute;top:-7px;right:-7px;
+    background:var(--cyan);color:var(--bg);
+    font-size:.42rem;letter-spacing:.1em;font-weight:500;
+    padding:.15rem .4rem;
+    animation:badgePulse 2s ease-in-out infinite;
+  }
+  @keyframes badgePulse { 0%,100%{opacity:1}50%{opacity:.5} }
+
+  /* translate fade */
+  [data-fr],[data-en] { transition:opacity .18s ease; }
+  body.translating [data-fr], body.translating [data-en] { opacity:.3; }
+
+  nav { position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 4rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,10,24,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--line); }
+  .nav-logo { font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:.05em;text-decoration:none;background:linear-gradient(135deg,var(--electric-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent; }
+  .nav-links { display:flex;gap:2.5rem;list-style:none; }
+  .nav-links a { font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;position:relative; }
+  .nav-links a::after { content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:linear-gradient(to right,var(--electric),var(--cyan));transform:scaleX(0);transform-origin:right;transition:transform .3s; }
+  .nav-links a:hover { color:var(--white); }
+  .nav-links a:hover::after { transform:scaleX(1);transform-origin:left; }
+
+  #hero { min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 4rem;position:relative;overflow:hidden;z-index:1; }
+  .hero-left { position:relative;z-index:2; }
+  .hero-eyebrow { font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.8rem;display:flex;align-items:center;gap:1rem; }
+  .hero-eyebrow::before { content:'';width:36px;height:1px;background:linear-gradient(to right,var(--electric),var(--cyan)); }
+  .hero-name { font-family:'Syne',sans-serif;font-size:clamp(3rem,5.5vw,5rem);font-weight:800;line-height:1.0;letter-spacing:-.02em;margin-bottom:.5rem; }
+  .hero-name .last { background:linear-gradient(135deg,var(--electric-bright) 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block; }
+  .hero-title { font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:.8rem 0 2.5rem; }
+  .hero-desc { font-size:.78rem;line-height:2;color:rgba(240,244,255,.55);max-width:400px;margin-bottom:3rem; }
+  .hero-ctas { display:flex;gap:1.5rem;align-items:center; }
+  .btn-primary { padding:.85rem 2.2rem;background:linear-gradient(135deg,var(--electric),var(--electric-glow));color:#fff;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;font-weight:500;transition:transform .2s,box-shadow .3s;display:inline-block;box-shadow:0 0 24px rgba(26,111,255,.4); }
+  .btn-primary:hover { transform:translateY(-2px);box-shadow:0 0 40px rgba(26,111,255,.6); }
+  .btn-ghost { font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.6rem;border:1px solid var(--line);padding:.85rem 1.8rem;transition:color .3s,border-color .3s; }
+  .btn-ghost:hover { color:var(--cyan);border-color:var(--cyan-dim); }
+
+  .hero-right { position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-end;gap:2rem; }
+  .photo-wrap { position:relative;width:300px;height:380px; }
+  .photo-hex-border { position:absolute;inset:-3px;background:linear-gradient(135deg,var(--electric),var(--cyan),var(--electric));border-radius:2px;z-index:0;animation:borderGlow 3s ease-in-out infinite alternate; }
+  @keyframes borderGlow { from{opacity:.6}to{opacity:1} }
+  .photo-inner { position:absolute;inset:3px;z-index:1;overflow:hidden;background:var(--bg2); }
+  .photo-img { width:100%;height:100%;object-fit:cover;object-position:center top;filter:contrast(1.05)saturate(0.9); }
+  .photo-scan { position:absolute;inset:0;z-index:2;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(26,111,255,.03) 2px,rgba(26,111,255,.03) 4px);pointer-events:none; }
+  .photo-corner { position:absolute;width:20px;height:20px;z-index:3; }
+  .photo-corner.tl { top:-3px;left:-3px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan); }
+  .photo-corner.tr { top:-3px;right:-3px;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan); }
+  .photo-corner.bl { bottom:-3px;left:-3px;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan); }
+  .photo-corner.br { bottom:-3px;right:-3px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan); }
+  .hero-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);width:300px; }
+  .stat-item { background:var(--bg2);padding:1.2rem 1rem;text-align:center; }
+  .stat-num { font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--electric-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;line-height:1; }
+  .stat-label { font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;display:block; }
+  .avail-badge { font-size:.58rem;letter-spacing:.15em;color:var(--muted);display:flex;align-items:center;gap:.6rem; }
+  .avail-dot { width:7px;height:7px;border-radius:50%;background:#00FF88;box-shadow:0 0 10px #00FF88;animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)} }
+
+  section { padding:7rem 4rem;position:relative;z-index:1; }
+  .section-label { font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:var(--cyan);margin-bottom:1rem;display:flex;align-items:center;gap:1rem; }
+  .section-label::before { content:'';width:30px;height:1px;background:linear-gradient(to right,var(--electric),var(--cyan)); }
+  .section-title { font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.1;margin-bottom:1rem; }
+  .section-title em { font-style:normal;background:linear-gradient(135deg,var(--electric-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent; }
+  .section-divider { width:60px;height:2px;background:linear-gradient(to right,var(--electric),var(--cyan),transparent);margin:2rem 0 3.5rem; }
+
+  #skills { background:var(--bg2); }
+  .skills-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem; }
+  .skill-cat { background:var(--bg);padding:2.5rem;transition:background .3s; }
+  .skill-cat:hover { background:rgba(26,111,255,.05); }
+  .skill-cat-title { font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.8rem;padding-bottom:1rem;border-bottom:1px solid var(--line2); }
+  .skill-list { list-style:none;display:flex;flex-direction:column;gap:.9rem; }
+  .skill-item { display:flex;justify-content:space-between;align-items:center;font-size:.7rem;color:rgba(240,244,255,.65); }
+  .skill-bar-wrap { width:80px;height:2px;background:rgba(255,255,255,.07);position:relative;overflow:hidden; }
+  .skill-bar { position:absolute;top:0;left:0;bottom:0;background:linear-gradient(to right,var(--electric),var(--cyan));transition:width 1.5s ease; }
+  .skill-tag-wrap { display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem; }
+  .skill-tag { font-size:.6rem;letter-spacing:.1em;padding:.3rem .8rem;border:1px solid var(--line);color:var(--muted);transition:border-color .3s,color .3s,box-shadow .3s; }
+  .skill-tag:hover { border-color:var(--electric);color:var(--electric-bright);box-shadow:0 0 12px rgba(26,111,255,.2); }
+
+  #data { background:var(--bg); }
+  .data-tools { display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem; }
+  .data-tool { background:var(--bg2);padding:2rem 1.5rem;text-align:center;transition:background .3s,box-shadow .3s;position:relative;overflow:hidden; }
+  .data-tool::before { content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--electric),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s; }
+  .data-tool:hover { background:rgba(26,111,255,.06);box-shadow:0 0 30px rgba(26,111,255,.1) inset; }
+  .data-tool:hover::before { transform:scaleX(1); }
+  .data-tool-icon { font-size:2rem;margin-bottom:.8rem;display:block; }
+  .data-tool-name { font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.4rem; }
+  .data-tool-desc { font-size:.58rem;letter-spacing:.08em;color:var(--muted);line-height:1.7; }
+
+  #projects { background:var(--bg2); }
+  .projects-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem; }
+  .project-card { background:var(--bg);padding:3rem;position:relative;overflow:hidden;cursor:pointer;transition:background .4s; }
+  .project-card::after { content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(26,111,255,.08),transparent 60%);opacity:0;transition:opacity .4s; }
+  .project-card:hover { background:#070D1E; }
+  .project-card:hover::after { opacity:1; }
+  .project-num { font-family:'Syne',sans-serif;font-size:4.5rem;font-weight:800;color:rgba(26,111,255,.08);position:absolute;top:1.5rem;right:2rem;line-height:1;transition:color .4s; }
+  .project-card:hover .project-num { color:rgba(0,212,255,.12); }
+  .project-type { font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--electric);margin-bottom:1.2rem; }
+  .project-title { font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:1rem;line-height:1.2; }
+  .project-desc { font-size:.7rem;line-height:1.9;color:rgba(240,244,255,.45);margin-bottom:2rem; }
+  .project-stack { display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem; }
+  .project-tag { font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .7rem;border:1px solid var(--line);color:var(--muted); }
+  .project-link { font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .3s,text-shadow .3s; }
+  .project-link:hover { gap:1rem;text-shadow:0 0 12px var(--cyan); }
+
+  #timeline { background:var(--bg); }
+  .timeline-wrap { position:relative;margin-top:3rem;padding-left:3rem; }
+  .timeline-wrap::before { content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--electric),var(--cyan-dim),transparent); }
+  .timeline-item { position:relative;padding-bottom:3.5rem;opacity:0;transform:translateX(-20px);transition:opacity .6s,transform .6s; }
+  .timeline-item.visible { opacity:1;transform:translateX(0); }
+  .timeline-dot { position:absolute;left:-3.4rem;top:.3rem;width:10px;height:10px;border:1px solid var(--electric);border-radius:50%;background:var(--bg);transition:background .3s,box-shadow .3s; }
+  .timeline-item:hover .timeline-dot { background:var(--electric);box-shadow:0 0 12px var(--electric); }
+  .timeline-year { font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--electric);margin-bottom:.5rem; }
+  .timeline-company { font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:.3rem; }
+  .timeline-role { font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem; }
+  .timeline-desc { font-size:.7rem;line-height:1.9;color:rgba(240,244,255,.45);max-width:560px; }
+  .timeline-badge { display:inline-block;margin-top:1rem;font-size:.55rem;letter-spacing:.15em;padding:.3rem .8rem;border:1px solid rgba(0,255,136,.35);color:#00FF88;box-shadow:0 0 8px rgba(0,255,136,.1); }
+
+  #contact { background:var(--bg2);text-align:center;display:flex;flex-direction:column;align-items:center; }
+  .contact-inner { max-width:640px; }
+  .contact-email { font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;background:linear-gradient(135deg,var(--electric-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;display:block;margin:2rem 0;transition:filter .3s; }
+  .contact-email:hover { filter:brightness(1.3); }
+  .social-links { display:flex;gap:2.5rem;justify-content:center;list-style:none;margin:2.5rem 0; }
+  .social-links a { font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s; }
+  .social-links a:hover { color:var(--cyan); }
+  .cv-download { margin-top:2rem;padding:1rem 3rem;border:1px solid var(--electric);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--electric-bright);text-decoration:none;display:inline-block;transition:background .3s,color .3s,box-shadow .3s; }
+  .cv-download:hover { background:var(--electric);color:#fff;box-shadow:0 0 24px rgba(26,111,255,.5); }
+
+  footer { padding:2rem 4rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:.55rem;letter-spacing:.15em;color:rgba(107,122,153,.5);z-index:1;position:relative; }
+  .fade-in { opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s; }
+  .fade-in.visible { opacity:1;transform:translateY(0); }
+  ::-webkit-scrollbar { width:4px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--electric);border-radius:2px; }
+  @media(max-width:900px){
+    nav{padding:1.2rem 1.5rem;} .nav-links{display:none;}
+    #hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem;}
+    .hero-right{align-items:flex-start;margin-top:3rem;}
+    .photo-wrap{width:240px;height:300px;}
+    section{padding:5rem 1.5rem;}
+    .skills-grid,.projects-grid,.data-tools{grid-template-columns:1fr;}
+    footer{flex-direction:column;gap:1rem;text-align:center;}
+  }
+</style>
+</head>
+<body>
+<div class="glow-orb glow-orb-1"></div>
+<div class="glow-orb glow-orb-2"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">I.S.</a>
+  <ul class="nav-links">
+    <li><a href="#skills"><span data-fr="Compétences" data-en="Skills">Compétences</span></a></li>
+    <li><a href="#data"><span data-fr="Data & IA" data-en="Data & AI">Data & IA</span></a></li>
+    <li><a href="#projects"><span data-fr="Projets" data-en="Projects">Projets</span></a></li>
+    <li><a href="#timeline"><span data-fr="Parcours" data-en="Journey">Parcours</span></a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+    <span class="lang-badge" id="langBadge">EN</span>
+    <span class="lang-flag" id="langFlag">🇫🇷</span>
+    <span class="lang-label" id="langLabel">FR</span>
+    <span class="lang-arrow">⇄</span>
+  </button>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span data-fr="Data Scientist · Développeur Fullstack" data-en="Data Scientist · Fullstack Developer">Data Scientist · Développeur Fullstack</span></div>
+    <h1 class="hero-name">Ibrahim<br><span class="last">SAVADOGO</span></h1>
+    <p class="hero-title"><span data-fr="Data Science · Django · Flutter" data-en="Data Science · Django · Flutter">Data Science · Django · Flutter</span></p>
+    <p class="hero-desc"><span data-fr="Je transforme la donnée brute en insights actionnables et en produits digitaux robustes. De l'analyse ML en production aux applications web et mobiles performantes." data-en="I turn raw data into actionable insights and robust digital products. From production ML analysis to high-performance web and mobile applications.">Je transforme la donnée brute en insights actionnables et en produits digitaux robustes. De l'analyse ML en production aux applications web et mobiles performantes.</span></p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary"><span data-fr="Me contacter" data-en="Contact me">Me contacter</span></a>
+      <a href="#projects" class="btn-ghost"><span data-fr="Voir mes projets" data-en="View my projects">Voir mes projets</span></a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-wrap">
+      <div class="photo-hex-border"></div>
+      <div class="photo-inner">
+        <img class="photo-img" src="photo_Ibrahim.jpg" alt="Ibrahim SAVADOGO">
+        <div class="photo-scan"></div>
+      </div>
+      <div class="photo-corner tl"></div>
+      <div class="photo-corner tr"></div>
+      <div class="photo-corner bl"></div>
+      <div class="photo-corner br"></div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-num">2+</span><span class="stat-label"><span data-fr="Années" data-en="Years">Années</span></span></div>
+      <div class="stat-item"><span class="stat-num">12+</span><span class="stat-label"><span data-fr="Projets" data-en="Projects">Projets</span></span></div>
+      <div class="stat-item"><span class="stat-num">99%</span><span class="stat-label">Uptime</span></div>
+    </div>
+    <div class="avail-badge"><span class="avail-dot"></span><span data-fr="Disponible — Freelance & CDI" data-en="Available — Freelance & Full-time">Disponible — Freelance & CDI</span></div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label fade-in"><span data-fr="Compétences" data-en="Skills">Compétences</span></div>
+  <h2 class="section-title fade-in"><span data-fr="Stack" data-en="Tech">Stack</span> <em><span data-fr="Technique" data-en="Stack">Technique</span></em></h2>
+  <div class="section-divider fade-in"></div>
+  <div class="skills-grid fade-in">
+    <div class="skill-cat">
+      <div class="skill-cat-title"><span data-fr="Data Science & IA" data-en="Data Science & AI">Data Science & IA</span></div>
+      <ul class="skill-list">
+        <li class="skill-item">Python / Pandas / NumPy <div class="skill-bar-wrap"><div class="skill-bar" data-w="95"></div></div></li>
+        <li class="skill-item">Power BI / Dataviz <div class="skill-bar-wrap"><div class="skill-bar" data-w="90"></div></div></li>
+        <li class="skill-item">SQL / MySQL <div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></li>
+        <li class="skill-item">HPC <div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></li>
+        <li class="skill-item"><span data-fr="Excel avancé" data-en="Advanced Excel">Excel avancé</span> <div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></li>
+        <li class="skill-item">Machine Learning <div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></li>
+      </ul>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title"><span data-fr="Développement Web" data-en="Web Development">Développement Web</span></div>
+      <ul class="skill-list">
+        <li class="skill-item">Django / Python <div class="skill-bar-wrap"><div class="skill-bar" data-w="92"></div></div></li>
+        <li class="skill-item">Bootstrap <div class="skill-bar-wrap"><div class="skill-bar" data-w="92"></div></div></li>
+        <li class="skill-item">Django REST Framework <div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></li>
+        <li class="skill-item">HTML / CSS / JS <div class="skill-bar-wrap"><div class="skill-bar" data-w="82"></div></div></li>
+        <li class="skill-item">APIs RESTful <div class="skill-bar-wrap"><div class="skill-bar" data-w="90"></div></div></li>
+        <li class="skill-item">SQLite / MySQL / XAMPP <div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></li>
+      </ul>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title"><span data-fr="Mobile & Outils" data-en="Mobile & Tools">Mobile & Outils</span></div>
+      <ul class="skill-list">
+        <li class="skill-item">Flutter / Dart <div class="skill-bar-wrap"><div class="skill-bar" data-w="84"></div></div></li>
+        <li class="skill-item">Git / GitHub <div class="skill-bar-wrap"><div class="skill-bar" data-w="90"></div></div></li>
+        <li class="skill-item">Jupyter / Colab <div class="skill-bar-wrap"><div class="skill-bar" data-w="95"></div></div></li>
+      </ul>
+    </div>
+  </div>
+  <div class="skill-tag-wrap fade-in">
+    <span class="skill-tag">Python</span><span class="skill-tag">Django</span><span class="skill-tag">Flutter</span><span class="skill-tag">MySQL</span><span class="skill-tag">Power BI</span><span class="skill-tag">Pandas</span><span class="skill-tag">REST API</span><span class="skill-tag">Git</span><span class="skill-tag">Jupyter</span>
+  </div>
+</section>
+
+<section id="data">
+  <div class="section-label fade-in"><span data-fr="Data & Intelligence Artificielle" data-en="Data & Artificial Intelligence">Data & Intelligence Artificielle</span></div>
+  <h2 class="section-title fade-in"><span data-fr="Outils &" data-en="Tools &">Outils &</span> <em><span data-fr="Expertise Data" data-en="Data Expertise">Expertise Data</span></em></h2>
+  <div class="section-divider fade-in"></div>
+  <div class="data-tools fade-in">
+    <div class="data-tool"><span class="data-tool-icon">🐍</span><div class="data-tool-name">Python</div><div class="data-tool-desc"><span data-fr="Analyse, modélisation ML, automatisation et pipelines de traitement de données." data-en="Analysis, ML modeling, automation and data processing pipelines.">Analyse, modélisation ML, automatisation et pipelines de traitement de données.</span></div></div>
+    <div class="data-tool"><span class="data-tool-icon">📊</span><div class="data-tool-name">Power BI</div><div class="data-tool-desc"><span data-fr="Dashboards interactifs, rapports métier, KPIs et visualisation avancée." data-en="Interactive dashboards, business reports, KPIs and advanced visualization.">Dashboards interactifs, rapports métier, KPIs et visualisation avancée.</span></div></div>
+    <div class="data-tool"><span class="data-tool-icon">🗄️</span><div class="data-tool-name">MySQL</div><div class="data-tool-desc"><span data-fr="Conception BDD, requêtes optimisées, modélisation relationnelle." data-en="Database design, optimized queries, relational modeling.">Conception BDD, requêtes optimisées, modélisation relationnelle.</span></div></div>
+    <div class="data-tool"><span class="data-tool-icon">🤖</span><div class="data-tool-name">Machine Learning</div><div class="data-tool-desc"><span data-fr="Modèles prédictifs, classification, clustering et déploiement production." data-en="Predictive models, classification, clustering and production deployment.">Modèles prédictifs, classification, clustering et déploiement production.</span></div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label fade-in"><span data-fr="Réalisations" data-en="Work">Réalisations</span></div>
+  <h2 class="section-title fade-in"><span data-fr="Projets" data-en="Selected">Projets</span> <em><span data-fr="Sélectionnés" data-en="Projects">Sélectionnés</span></em></h2>
+  <div class="section-divider fade-in"></div>
+  <div class="projects-grid fade-in">
+
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-type">ERP · Data Science · Machine Learning</div>
+      <h3 class="project-title"><span data-fr="Pipeline ERP Automatisé" data-en="Automated ERP Pipeline">Pipeline ERP Automatisé</span><br>Python + MySQL + ML</h3>
+      <p class="project-desc"><span data-fr="Pipeline complet d'automatisation de données couvrant Ventes, Finance et Logistique. XGBoost, LSTM, 3 modèles ML (régression, K-Means, Isolation Forest), 10 graphiques auto-générés et rapport PDF automatique. R² > 0.85 sur les prévisions de ventes." data-en="Complete data automation pipeline covering Sales, Finance and Logistics. XGBoost, LSTM, 3 ML models (regression, K-Means, Isolation Forest), 10 auto-generated charts and automatic PDF report. R² > 0.85 on sales forecasts.">Pipeline complet d'automatisation de données couvrant Ventes, Finance et Logistique. XGBoost, LSTM, 3 modèles ML (régression, K-Means, Isolation Forest), 10 graphiques auto-générés et rapport PDF automatique. R² > 0.85 sur les prévisions de ventes.</span></p>
+      <div class="project-stack">
+        <span class="project-tag">Python</span><span class="project-tag">MySQL</span><span class="project-tag">Scikit-learn</span><span class="project-tag">Pandas</span><span class="project-tag">ReportLab</span><span class="project-tag">Matplotlib</span>
+      </div>
+      <a href="https://github.com/ibrahimsava/erp-automatisation-python-ml" target="_blank" class="project-link"><span data-fr="Voir le projet →" data-en="View project →">Voir le projet →</span></a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-type">Web · Django · <span data-fr="Gestion Scolaire & E-commerce" data-en="School Management & E-commerce">Gestion Scolaire & E-commerce</span></div>
+      <h3 class="project-title"><span data-fr="Plateforme de Gestion" data-en="Management Platform">Plateforme de Gestion</span><br><span data-fr="Scolaire & Métier" data-en="School & Business">Scolaire & Métier</span></h3>
+      <p class="project-desc"><span data-fr="Application web full-stack Django avec authentification, API REST, interface admin personnalisée et intégration MySQL. Inclut une application de gestion scolaire et une application e-commerce." data-en="Full-stack Django web application with authentication, REST API, custom admin interface and MySQL integration. Includes a school management app and an e-commerce application.">Application web full-stack Django avec authentification, API REST, interface admin personnalisée et intégration MySQL. Inclut une application de gestion scolaire et une application e-commerce.</span></p>
+      <div class="project-stack">
+        <span class="project-tag">Django</span><span class="project-tag">Python</span><span class="project-tag">MySQL</span><span class="project-tag">REST API</span><span class="project-tag">Bootstrap</span>
+      </div>
+      <a href="https://github.com/ibrahimsava/App_gestion_school" target="_blank" class="project-link"><span data-fr="Voir le projet →" data-en="View project →">Voir le projet →</span></a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-type">Mobile · Flutter · IoT</div>
+      <h3 class="project-title"><span data-fr="Application Mobile" data-en="Mobile Application">Application Mobile</span><br><span data-fr="Monitoring Sol en Temps Réel" data-en="Real-Time Soil Monitoring">Monitoring Sol en Temps Réel</span></h3>
+      <p class="project-desc"><span data-fr="Application Flutter multiplateforme (Android) avec interface soignée, sync temps réel et consommation d'APIs REST Django. Monitoring des grandeurs physico-chimiques du sol en temps réel." data-en="Cross-platform Flutter app (Android) with polished UI, real-time sync and Django REST API consumption. Real-time monitoring of soil physicochemical parameters.">Application Flutter multiplateforme (Android) avec interface soignée, sync temps réel et consommation d'APIs REST Django. Monitoring des grandeurs physico-chimiques du sol en temps réel.</span></p>
+      <div class="project-stack">
+        <span class="project-tag">Flutter</span><span class="project-tag">Dart</span><span class="project-tag">Django API</span><span class="project-tag">MySQL</span>
+      </div>
+      <a href="https://github.com/ibrahimsava/site_degestions_des_employes" target="_blank" class="project-link"><span data-fr="Voir le projet →" data-en="View project →">Voir le projet →</span></a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-type">Data Viz · Business Intelligence</div>
+      <h3 class="project-title"><span data-fr="Dashboard BI" data-en="BI Dashboard">Dashboard BI</span><br><span data-fr="& Reporting Automatisé" data-en="& Automated Reporting">& Reporting Automatisé</span></h3>
+      <p class="project-desc"><span data-fr="Tableau de bord Power BI connecté à MySQL avec actualisation automatique, suivi KPIs et analyses pour la prise de décision." data-en="Power BI dashboard connected to MySQL with automatic refresh, KPI tracking and decision-making analytics.">Tableau de bord Power BI connecté à MySQL avec actualisation automatique, suivi KPIs et analyses pour la prise de décision.</span></p>
+      <div class="project-stack">
+        <span class="project-tag">Power BI</span><span class="project-tag">MySQL</span><span class="project-tag">Python</span><span class="project-tag">DAX</span>
+      </div>
+      <a href="https://github.com/ibrahimsava" target="_blank" class="project-link"><span data-fr="Voir le projet →" data-en="View project →">Voir le projet →</span></a>
+    </div>
+
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="section-label fade-in"><span data-fr="Parcours" data-en="Journey">Parcours</span></div>
+  <h2 class="section-title fade-in"><span data-fr="Expérience &" data-en="Experience &">Expérience &</span> <em><span data-fr="Formation" data-en="Education">Formation</span></em></h2>
+  <div class="section-divider fade-in"></div>
+  <div class="timeline-wrap">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2023 — <span data-fr="Présent" data-en="Present">Présent</span></div>
+      <h3 class="timeline-company"><span data-fr="Poste actuel" data-en="Current Position">Poste actuel</span></h3>
+      <div class="timeline-role"><span data-fr="Stagiaire en Data Science · Développeur Full-Stack" data-en="Data Science Intern · Full-Stack Developer">Stagiaire en Data Science · Développeur Full-Stack</span></div>
+      <p class="timeline-desc"><span data-fr="Développement Django et Flutter, analyses Power BI." data-en="Django and Flutter development, Power BI analytics.">Développement Django et Flutter, analyses Power BI.</span></p>
+      <span class="timeline-badge"><span data-fr="Poste actuel" data-en="Current position">Poste actuel</span></span>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2021 — 2023</div>
+      <h3 class="timeline-company"><span data-fr="Expérience Professionnelle" data-en="Professional Experience">Expérience Professionnelle</span></h3>
+      <div class="timeline-role"><span data-fr="Développeur Python · Data Analyst" data-en="Python Developer · Data Analyst">Développeur Python · Data Analyst</span></div>
+      <p class="timeline-desc"><span data-fr="Développement outils d'analyse, automatisation, applications Django et reporting Power BI." data-en="Development of analysis tools, automation, Django applications and Power BI reporting.">Développement outils d'analyse, automatisation, applications Django et reporting Power BI.</span></p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2019 — 2021</div>
+      <h3 class="timeline-company"><span data-fr="Formation Supérieure" data-en="Higher Education">Formation Supérieure</span></h3>
+      <div class="timeline-role"><span data-fr="Ingénierie Informatique · Data Science" data-en="Computer Engineering · Data Science">Ingénierie Informatique · Data Science</span></div>
+      <p class="timeline-desc"><span data-fr="Spécialisation en analyse de données, bases de données, développement logiciel et statistiques appliquées." data-en="Specialization in data analysis, databases, software development and applied statistics.">Spécialisation en analyse de données, bases de données, développement logiciel et statistiques appliquées.</span></p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year"><span data-fr="Certifications" data-en="Certifications">Certifications</span></div>
+      <h3 class="timeline-company"><span data-fr="Formations continues" data-en="Continuous Learning">Formations continues</span></h3>
+      <div class="timeline-role">Power BI · Python · Django · Flutter</div>
+      <p class="timeline-desc"><span data-fr="Formation continue en Data Science, Django REST et développement mobile Flutter." data-en="Continuous training in Data Science, Django REST and Flutter mobile development.">Formation continue en Data Science, Django REST et développement mobile Flutter.</span></p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label fade-in" style="justify-content:center;">Contact</div>
+    <h2 class="section-title fade-in" style="text-align:center;"><span data-fr="Travaillons" data-en="Let's Work">Travaillons</span> <em><span data-fr="Ensemble" data-en="Together">Ensemble</span></em></h2>
+    <div class="section-divider fade-in" style="margin:2rem auto;"></div>
+    <p class="fade-in" style="font-size:.75rem;line-height:1.9;color:rgba(240,244,255,.45);"><span data-fr="Disponible pour des missions Data Science, développement Django, Flutter ou analyses Power BI." data-en="Available for Data Science projects, Django development, Flutter or Power BI analytics.">Disponible pour des missions Data Science, développement Django, Flutter ou analyses Power BI.</span></p>
+    <a href="mailto:savadogoibrahim0915@gmail.com" class="contact-email fade-in">savadogoibrahim0915@gmail.com</a>
+    <ul class="social-links fade-in">
+      <li><a href="https://github.com/ibrahimsava" target="_blank">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/ibrahim-savadogo-70063128a" target="_blank">LinkedIn</a></li>
+    </ul>
+    <a href="CV.pdf" download class="cv-download fade-in"><span data-fr="↓ Télécharger mon CV" data-en="↓ Download my Resume">↓ Télécharger mon CV</span></a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Ibrahim SAVADOGO</span>
+  <span><span data-fr="Data Scientist · Développeur" data-en="Data Scientist · Developer">Data Scientist · Développeur</span></span>
+</footer>
+
+<script>
+// ── Cursor ──
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function a(){cursor.style.transform=`translate(${mx-5}px,${my-5}px)`;rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx-18}px,${ry-18}px)`;requestAnimationFrame(a);})();
+document.querySelectorAll('a,button,.project-card,.data-tool').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='54px';ring.style.height='54px';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';});
+});
+
+// ── Scroll animations ──
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.15});
+document.querySelectorAll('.fade-in,.timeline-item').forEach(el=>obs.observe(el));
+const bObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.querySelectorAll('.skill-bar').forEach(b=>b.style.width=b.dataset.w+'%');bObs.unobserve(x.target);}});},{threshold:.3});
+document.querySelectorAll('.skills-grid').forEach(el=>{el.querySelectorAll('.skill-bar').forEach(b=>b.style.width='0');bObs.observe(el);});
+window.addEventListener('scroll',()=>{let c='';document.querySelectorAll('section[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.id;});document.querySelectorAll('.nav-links a').forEach(a=>{a.style.color=a.getAttribute('href')==='#'+c?'var(--cyan)':'';});});
+
+// ── Language Toggle ──
+let currentLang = 'fr';
+const toggle = document.getElementById('langToggle');
+const langFlag = document.getElementById('langFlag');
+const langLabel = document.getElementById('langLabel');
+const langBadge = document.getElementById('langBadge');
+
+function applyLang(lang) {
+  document.body.classList.add('translating');
+  setTimeout(() => {
+    document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+      el.textContent = lang === 'en' ? el.dataset.en : el.dataset.fr;
+    });
+    if (lang === 'en') {
+      langFlag.textContent = '🇬🇧';
+      langLabel.textContent = 'EN';
+      langBadge.textContent = 'FR';
+      document.documentElement.lang = 'en';
+    } else {
+      langFlag.textContent = '🇫🇷';
+      langLabel.textContent = 'FR';
+      langBadge.textContent = 'EN';
+      document.documentElement.lang = 'fr';
+    }
+    document.body.classList.remove('translating');
+  }, 150);
+}
+
+toggle.addEventListener('click', () => {
+  toggle.classList.add('switching');
+  currentLang = currentLang === 'fr' ? 'en' : 'fr';
+  applyLang(currentLang);
+  setTimeout(() => toggle.classList.remove('switching'), 300);
+});
+</script>
+</body>
+</html>
