@@ -2,453 +2,908 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ibrahim SAVADOGO — Data Scientist & Développeur</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ibrahim Savadogo · Ingénieur logiciel Full Stack</title>
+<meta name="description" content="Ibrahim Savadogo, ingénieur logiciel Full Stack basé à Abidjan. Java / Spring Boot, Angular, Flutter, Python / Django, data et IoT. Disponible en CDI et en freelance.">
+<meta name="author" content="Ibrahim Savadogo">
+<meta name="theme-color" content="#FAF8F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E0F12" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://ibrahimsava.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Ibrahim Savadogo · Ingénieur logiciel Full Stack">
+<meta property="og:description" content="Applications de bout en bout : API Spring Boot et Django, interfaces Angular et Flutter, pipelines de données et IoT.">
+<meta property="og:url" content="https://ibrahimsava.github.io/">
+<meta property="og:image" content="https://ibrahimsava.github.io/photo_Ibrahim.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23F07A2F'%3EIS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ibrahim Savadogo",
+  "jobTitle": "Ingénieur logiciel Full Stack",
+  "url": "https://ibrahimsava.github.io/",
+  "image": "https://ibrahimsava.github.io/photo_Ibrahim.jpg",
+  "email": "mailto:savadogoibrahim0915@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Abidjan", "addressCountry": "CI" },
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "Université Joseph Ki-Zerbo" },
+    { "@type": "CollegeOrUniversity", "name": "Université Félix Houphouët-Boigny" }
+  ],
+  "knowsAbout": ["Java", "Spring Boot", "Angular", "Flutter", "Python", "Django", "RabbitMQ", "Docker", "PostgreSQL", "Machine Learning", "IoT"],
+  "sameAs": ["https://github.com/ibrahimsava", "https://www.linkedin.com/in/ibrahim-savadogo-70063128a"]
+}
+</script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #050A18; --bg2: #080F22; --bg3: #0B1530;
-    --electric: #1A6FFF; --electric-bright: #4D94FF; --electric-glow: #0057FF;
-    --cyan: #00D4FF; --cyan-dim: #0099BB;
-    --white: #F0F4FF; --muted: #6B7A99;
-    --line: rgba(26,111,255,0.18); --line2: rgba(0,212,255,0.12);
+:root {
+  --bg: #FAF8F5;
+  --surface: #FFFFFF;
+  --surface-2: #F2EFEA;
+  --ink: #16171A;
+  --ink-2: #4A4D55;
+  --ink-3: #7A7E88;
+  --line: #E4E0D9;
+  --accent: #D9531E;
+  --accent-ink: #B8420F;
+  --accent-soft: #FBE9DF;
+  --ok: #1F8A4C;
+  --shadow: 0 1px 2px rgba(22,23,26,.04), 0 8px 24px rgba(22,23,26,.06);
+  --radius: 14px;
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --maxw: 1120px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E0F12; --surface: #16181C; --surface-2: #1C1F24; --ink: #F1EFEA; --ink-2: #B9BBC2; --ink-3: #868A94;
+    --line: #2A2D34; --accent: #FF8A4C; --accent-ink: #FFA06B; --accent-soft: #2B1D16; --ok: #3CCB7F;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35); color-scheme: dark;
   }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--white); font-family: 'DM Mono', monospace; font-weight: 300; overflow-x: hidden; cursor: none; }
-  .cursor { position:fixed;top:0;left:0;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .08s ease;mix-blend-mode:screen; }
-  .cursor-ring { position:fixed;top:0;left:0;width:36px;height:36px;border:1px solid rgba(0,212,255,.4);border-radius:50%;pointer-events:none;z-index:9998;transition:transform .18s ease,width .3s,height .3s; }
-  body::after { content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(26,111,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(26,111,255,.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0; }
-  .glow-orb { position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0; }
-  .glow-orb-1 { width:600px;height:600px;background:rgba(26,111,255,.12);top:-100px;right:-100px; }
-  .glow-orb-2 { width:400px;height:400px;background:rgba(0,212,255,.08);bottom:10%;left:-100px; }
+}
+:root[data-theme="dark"] {
+  --bg: #0E0F12; --surface: #16181C; --surface-2: #1C1F24; --ink: #F1EFEA; --ink-2: #B9BBC2; --ink-3: #868A94;
+  --line: #2A2D34; --accent: #FF8A4C; --accent-ink: #FFA06B; --accent-soft: #2B1D16; --ok: #3CCB7F;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35); color-scheme: dark;
+}
 
-  /* ── LANGUAGE TOGGLE ── */
-  .lang-toggle {
-    display:flex;align-items:center;gap:.5rem;
-    background:rgba(26,111,255,.12);
-    border:1px solid var(--line);
-    padding:.35rem .7rem;
-    cursor:pointer;
-    transition:background .3s,border-color .3s,box-shadow .3s;
-    position:relative;
-  }
-  .lang-toggle:hover { background:rgba(26,111,255,.22);border-color:var(--electric);box-shadow:0 0 14px rgba(26,111,255,.3); }
-  .lang-flag { font-size:.85rem;line-height:1; }
-  .lang-label { font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--white);font-family:'DM Mono',monospace;font-weight:500; }
-  .lang-arrow { font-size:.65rem;color:var(--cyan);transition:transform .3s; }
-  .lang-toggle.switching .lang-arrow { transform:rotate(180deg); }
-  .lang-badge {
-    position:absolute;top:-7px;right:-7px;
-    background:var(--cyan);color:var(--bg);
-    font-size:.42rem;letter-spacing:.1em;font-weight:500;
-    padding:.15rem .4rem;
-    animation:badgePulse 2s ease-in-out infinite;
-  }
-  @keyframes badgePulse { 0%,100%{opacity:1}50%{opacity:.5} }
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -.015em; }
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; z-index: 200; }
+.skip:focus { left: 12px; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+@media (max-width: 600px) { .wrap { padding: 0 16px; } }
+.mono { font-family: var(--mono); }
 
-  /* translate fade */
-  [data-fr],[data-en] { transition:opacity .18s ease; }
-  body.translating [data-fr], body.translating [data-en] { opacity:.3; }
+/* Header */
+header.top { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+header.top.scrolled { border-bottom-color: var(--line); }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 15px; }
+.brand-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--ink); color: var(--bg); display: grid; place-items: center; font: 600 13px var(--serif); }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a { text-decoration: none; color: var(--ink-2); font-size: 14px; font-weight: 500; transition: color .15s; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-tools { display: flex; align-items: center; gap: 8px; }
+.tool-btn { height: 34px; min-width: 34px; padding: 0 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 9px; cursor: pointer; font: 500 12px var(--mono); display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: border-color .15s; }
+.tool-btn:hover { border-color: var(--ink-3); }
+.tool-btn svg { width: 16px; height: 16px; }
+.menu-btn { display: none; }
+@media (max-width: 820px) {
+  .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 16px 16px; }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 12px 0; font-size: 16px; border-bottom: 1px solid var(--line); }
+  .menu-btn { display: inline-flex; }
+}
 
-  nav { position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 4rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,10,24,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--line); }
-  .nav-logo { font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:.05em;text-decoration:none;background:linear-gradient(135deg,var(--electric-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent; }
-  .nav-links { display:flex;gap:2.5rem;list-style:none; }
-  .nav-links a { font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;position:relative; }
-  .nav-links a::after { content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:linear-gradient(to right,var(--electric),var(--cyan));transform:scaleX(0);transform-origin:right;transition:transform .3s; }
-  .nav-links a:hover { color:var(--white); }
-  .nav-links a:hover::after { transform:scaleX(1);transform-origin:left; }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 20px; border-radius: 11px; text-decoration: none; font-weight: 500; font-size: 15px; border: 1px solid transparent; transition: transform .15s, background .15s, border-color .15s; white-space: nowrap; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { background: color-mix(in srgb, var(--ink) 88%, var(--accent)); }
+.btn-outline { border-color: var(--line); background: var(--surface); color: var(--ink); }
+.btn-outline:hover { border-color: var(--ink-3); }
+.btn svg { width: 17px; height: 17px; }
 
-  #hero { min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 4rem;position:relative;overflow:hidden;z-index:1; }
-  .hero-left { position:relative;z-index:2; }
-  .hero-eyebrow { font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.8rem;display:flex;align-items:center;gap:1rem; }
-  .hero-eyebrow::before { content:'';width:36px;height:1px;background:linear-gradient(to right,var(--electric),var(--cyan)); }
-  .hero-name { font-family:'Syne',sans-serif;font-size:clamp(3rem,5.5vw,5rem);font-weight:800;line-height:1.0;letter-spacing:-.02em;margin-bottom:.5rem; }
-  .hero-name .last { background:linear-gradient(135deg,var(--electric-bright) 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block; }
-  .hero-title { font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:.8rem 0 2.5rem; }
-  .hero-desc { font-size:.78rem;line-height:2;color:rgba(240,244,255,.55);max-width:400px;margin-bottom:3rem; }
-  .hero-ctas { display:flex;gap:1.5rem;align-items:center; }
-  .btn-primary { padding:.85rem 2.2rem;background:linear-gradient(135deg,var(--electric),var(--electric-glow));color:#fff;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;font-weight:500;transition:transform .2s,box-shadow .3s;display:inline-block;box-shadow:0 0 24px rgba(26,111,255,.4); }
-  .btn-primary:hover { transform:translateY(-2px);box-shadow:0 0 40px rgba(26,111,255,.6); }
-  .btn-ghost { font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.6rem;border:1px solid var(--line);padding:.85rem 1.8rem;transition:color .3s,border-color .3s; }
-  .btn-ghost:hover { color:var(--cyan);border-color:var(--cyan-dim); }
+/* Hero */
+.hero { padding: 72px 0 56px; }
+.hero-grid { display: grid; grid-template-columns: 1.35fr .85fr; gap: 56px; align-items: center; }
+.status { display: inline-flex; align-items: center; gap: 10px; padding: 6px 12px 6px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 13px; color: var(--ink-2); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent); animation: ping 2.4s infinite; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 8px transparent; } }
+.hero h1 { font-family: var(--serif); font-size: clamp(42px, 6.4vw, 76px); line-height: 1.02; margin: 22px 0 14px; letter-spacing: -.025em; }
+.hero h1 .role { display: block; color: var(--ink-3); font-size: .5em; letter-spacing: -.01em; margin-top: 10px; line-height: 1.15; }
+.hero h1 .role em { font-style: italic; color: var(--accent); }
+.lede { font-size: clamp(17px, 1.9vw, 19px); color: var(--ink-2); max-width: 58ch; margin-bottom: 30px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.portrait { position: relative; justify-self: end; width: 100%; max-width: 360px; }
+.portrait-frame { aspect-ratio: 4/5; border-radius: 22px; overflow: hidden; background: var(--surface-2); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.portrait-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.portrait-card { position: absolute; left: -28px; bottom: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); font-size: 13px; line-height: 1.4; }
+.portrait-card strong { display: block; font-size: 14px; }
+.portrait-card span { color: var(--ink-3); }
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 56px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.fact { padding: 20px 22px; border-right: 1px solid var(--line); }
+.fact:last-child { border-right: 0; }
+.fact b { display: block; font: 600 26px/1.1 var(--serif); letter-spacing: -.02em; }
+.fact span { font-size: 13.5px; color: var(--ink-3); }
+@media (max-width: 900px) {
+  .hero { padding-top: 40px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .portrait { justify-self: start; max-width: 300px; }
+  .portrait-card { left: auto; right: -12px; }
+  .facts { grid-template-columns: repeat(2, 1fr); }
+  .fact:nth-child(2) { border-right: 0; }
+  .fact:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+}
 
-  .hero-right { position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-end;gap:2rem; }
-  .photo-wrap { position:relative;width:300px;height:380px; }
-  .photo-hex-border { position:absolute;inset:-3px;background:linear-gradient(135deg,var(--electric),var(--cyan),var(--electric));border-radius:2px;z-index:0;animation:borderGlow 3s ease-in-out infinite alternate; }
-  @keyframes borderGlow { from{opacity:.6}to{opacity:1} }
-  .photo-inner { position:absolute;inset:3px;z-index:1;overflow:hidden;background:var(--bg2); }
-  .photo-img { width:100%;height:100%;object-fit:cover;object-position:center top;filter:contrast(1.05)saturate(0.9); }
-  .photo-scan { position:absolute;inset:0;z-index:2;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(26,111,255,.03) 2px,rgba(26,111,255,.03) 4px);pointer-events:none; }
-  .photo-corner { position:absolute;width:20px;height:20px;z-index:3; }
-  .photo-corner.tl { top:-3px;left:-3px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan); }
-  .photo-corner.tr { top:-3px;right:-3px;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan); }
-  .photo-corner.bl { bottom:-3px;left:-3px;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan); }
-  .photo-corner.br { bottom:-3px;right:-3px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan); }
-  .hero-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);width:300px; }
-  .stat-item { background:var(--bg2);padding:1.2rem 1rem;text-align:center; }
-  .stat-num { font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--electric-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;line-height:1; }
-  .stat-label { font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;display:block; }
-  .avail-badge { font-size:.58rem;letter-spacing:.15em;color:var(--muted);display:flex;align-items:center;gap:.6rem; }
-  .avail-dot { width:7px;height:7px;border-radius:50%;background:#00FF88;box-shadow:0 0 10px #00FF88;animation:pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)} }
+/* Sections */
+section { padding: 88px 0; }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
+.kicker { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--accent-ink); margin-bottom: 12px; display: block; }
+.sec-head h2 { font-family: var(--serif); font-size: clamp(30px, 4vw, 44px); line-height: 1.1; max-width: 22ch; }
+.sec-head p { color: var(--ink-2); max-width: 46ch; }
+.alt { background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 
-  section { padding:7rem 4rem;position:relative;z-index:1; }
-  .section-label { font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:var(--cyan);margin-bottom:1rem;display:flex;align-items:center;gap:1rem; }
-  .section-label::before { content:'';width:30px;height:1px;background:linear-gradient(to right,var(--electric),var(--cyan)); }
-  .section-title { font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.1;margin-bottom:1rem; }
-  .section-title em { font-style:normal;background:linear-gradient(135deg,var(--electric-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent; }
-  .section-divider { width:60px;height:2px;background:linear-gradient(to right,var(--electric),var(--cyan),transparent);margin:2rem 0 3.5rem; }
+/* Pillars */
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.pillar { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.pillar-icon { width: 42px; height: 42px; border-radius: 11px; background: var(--accent-soft); color: var(--accent-ink); display: grid; place-items: center; }
+.pillar-icon svg { width: 22px; height: 22px; }
+.pillar h3 { font-size: 19px; }
+.pillar p { color: var(--ink-2); font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+.chip { font: 500 12px var(--mono); padding: 4px 9px; border-radius: 7px; background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line); }
+@media (max-width: 900px) { .pillars { grid-template-columns: 1fr; } }
 
-  #skills { background:var(--bg2); }
-  .skills-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem; }
-  .skill-cat { background:var(--bg);padding:2.5rem;transition:background .3s; }
-  .skill-cat:hover { background:rgba(26,111,255,.05); }
-  .skill-cat-title { font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.8rem;padding-bottom:1rem;border-bottom:1px solid var(--line2); }
-  .skill-list { list-style:none;display:flex;flex-direction:column;gap:.9rem; }
-  .skill-item { display:flex;justify-content:space-between;align-items:center;font-size:.7rem;color:rgba(240,244,255,.65); }
-  .skill-bar-wrap { width:80px;height:2px;background:rgba(255,255,255,.07);position:relative;overflow:hidden; }
-  .skill-bar { position:absolute;top:0;left:0;bottom:0;background:linear-gradient(to right,var(--electric),var(--cyan));transition:width 1.5s ease; }
-  .skill-tag-wrap { display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem; }
-  .skill-tag { font-size:.6rem;letter-spacing:.1em;padding:.3rem .8rem;border:1px solid var(--line);color:var(--muted);transition:border-color .3s,color .3s,box-shadow .3s; }
-  .skill-tag:hover { border-color:var(--electric);color:var(--electric-bright);box-shadow:0 0 12px rgba(26,111,255,.2); }
+/* Featured case studies */
+.case { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow); }
+.case-body { padding: 40px; display: flex; flex-direction: column; gap: 18px; }
+.case-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font: 500 12px var(--mono); color: var(--ink-3); text-transform: uppercase; letter-spacing: .08em; }
+.case-meta .tag { color: var(--accent-ink); background: var(--accent-soft); padding: 3px 8px; border-radius: 6px; }
+.case h3 { font-family: var(--serif); font-size: clamp(24px, 2.6vw, 30px); line-height: 1.15; }
+.case-summary { color: var(--ink-2); }
+.case dl { margin: 0; display: grid; gap: 12px; }
+.case dt { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); }
+.case dd { margin: 2px 0 0; font-size: 15px; color: var(--ink-2); }
+.case-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; }
+.link-arrow { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; font-size: 15px; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 2px; transition: border-color .15s, gap .15s; }
+.link-arrow:hover { border-color: var(--accent); gap: 10px; }
+.case-visual { background: var(--surface-2); border-left: 1px solid var(--line); padding: 40px; display: flex; flex-direction: column; justify-content: center; gap: 22px; }
+.flow-title { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); }
+.flow { display: flex; flex-direction: column; gap: 0; }
+.node { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; gap: 14px; align-items: center; }
+.node-n { flex: none; width: 28px; height: 28px; border-radius: 8px; background: var(--ink); color: var(--bg); display: grid; place-items: center; font: 600 12px var(--mono); }
+.node b { display: block; font-size: 15px; font-weight: 600; }
+.node small { color: var(--ink-3); font-size: 13px; }
+.edge { width: 2px; height: 18px; background: var(--line); margin-left: 29px; position: relative; }
+.edge::after { content: ''; position: absolute; bottom: -1px; left: -4px; border: 5px solid transparent; border-top-color: var(--ink-3); border-bottom: 0; }
+@media (max-width: 900px) {
+  .case { grid-template-columns: 1fr; }
+  .case-visual { border-left: 0; border-top: 1px solid var(--line); padding: 28px 24px; }
+  .case-body { padding: 28px 24px; }
+}
 
-  #data { background:var(--bg); }
-  .data-tools { display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem; }
-  .data-tool { background:var(--bg2);padding:2rem 1.5rem;text-align:center;transition:background .3s,box-shadow .3s;position:relative;overflow:hidden; }
-  .data-tool::before { content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--electric),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s; }
-  .data-tool:hover { background:rgba(26,111,255,.06);box-shadow:0 0 30px rgba(26,111,255,.1) inset; }
-  .data-tool:hover::before { transform:scaleX(1); }
-  .data-tool-icon { font-size:2rem;margin-bottom:.8rem;display:block; }
-  .data-tool-name { font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.4rem; }
-  .data-tool-desc { font-size:.58rem;letter-spacing:.08em;color:var(--muted);line-height:1.7; }
+/* Project grid */
+.more-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 56px 0 20px; flex-wrap: wrap; }
+.more-head h3 { font-family: var(--serif); font-size: 26px; }
+.filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter { height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font: 500 13px var(--sans); cursor: pointer; transition: all .15s; }
+.filter:hover { color: var(--ink); border-color: var(--ink-3); }
+.filter[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit; transition: border-color .15s, transform .15s, box-shadow .15s; }
+.card:hover { border-color: var(--ink-3); transform: translateY(-2px); box-shadow: var(--shadow); }
+.card[hidden] { display: none; }
+.card-top { display: flex; justify-content: space-between; align-items: center; font: 500 12px var(--mono); color: var(--ink-3); text-transform: uppercase; letter-spacing: .08em; }
+.card-top svg { width: 18px; height: 18px; color: var(--ink-3); transition: color .15s, transform .15s; }
+.card:hover .card-top svg { color: var(--accent); transform: translate(2px, -2px); }
+.card h4 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
+.card p { color: var(--ink-2); font-size: 14.5px; }
+.card .chips { padding-top: 8px; }
+.badge-wip { font: 500 11px var(--mono); color: var(--accent-ink); background: var(--accent-soft); padding: 2px 7px; border-radius: 6px; text-transform: none; letter-spacing: 0; }
+@media (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
 
-  #projects { background:var(--bg2); }
-  .projects-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem; }
-  .project-card { background:var(--bg);padding:3rem;position:relative;overflow:hidden;cursor:pointer;transition:background .4s; }
-  .project-card::after { content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(26,111,255,.08),transparent 60%);opacity:0;transition:opacity .4s; }
-  .project-card:hover { background:#070D1E; }
-  .project-card:hover::after { opacity:1; }
-  .project-num { font-family:'Syne',sans-serif;font-size:4.5rem;font-weight:800;color:rgba(26,111,255,.08);position:absolute;top:1.5rem;right:2rem;line-height:1;transition:color .4s; }
-  .project-card:hover .project-num { color:rgba(0,212,255,.12); }
-  .project-type { font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--electric);margin-bottom:1.2rem; }
-  .project-title { font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:1rem;line-height:1.2; }
-  .project-desc { font-size:.7rem;line-height:1.9;color:rgba(240,244,255,.45);margin-bottom:2rem; }
-  .project-stack { display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem; }
-  .project-tag { font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .7rem;border:1px solid var(--line);color:var(--muted); }
-  .project-link { font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:gap .3s,text-shadow .3s; }
-  .project-link:hover { gap:1rem;text-shadow:0 0 12px var(--cyan); }
+/* Now */
+.now { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.now-item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+.now-item .kicker { margin-bottom: 8px; }
+.now-item h3 { font-size: 19px; margin-bottom: 8px; }
+.now-item p { color: var(--ink-2); font-size: 15px; }
+@media (max-width: 800px) { .now { grid-template-columns: 1fr; } }
 
-  #timeline { background:var(--bg); }
-  .timeline-wrap { position:relative;margin-top:3rem;padding-left:3rem; }
-  .timeline-wrap::before { content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--electric),var(--cyan-dim),transparent); }
-  .timeline-item { position:relative;padding-bottom:3.5rem;opacity:0;transform:translateX(-20px);transition:opacity .6s,transform .6s; }
-  .timeline-item.visible { opacity:1;transform:translateX(0); }
-  .timeline-dot { position:absolute;left:-3.4rem;top:.3rem;width:10px;height:10px;border:1px solid var(--electric);border-radius:50%;background:var(--bg);transition:background .3s,box-shadow .3s; }
-  .timeline-item:hover .timeline-dot { background:var(--electric);box-shadow:0 0 12px var(--electric); }
-  .timeline-year { font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--electric);margin-bottom:.5rem; }
-  .timeline-company { font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:.3rem; }
-  .timeline-role { font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem; }
-  .timeline-desc { font-size:.7rem;line-height:1.9;color:rgba(240,244,255,.45);max-width:560px; }
-  .timeline-badge { display:inline-block;margin-top:1rem;font-size:.55rem;letter-spacing:.15em;padding:.3rem .8rem;border:1px solid rgba(0,255,136,.35);color:#00FF88;box-shadow:0 0 8px rgba(0,255,136,.1); }
+/* Stack */
+.stack { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.stack-col { padding: 26px; border-right: 1px solid var(--line); }
+.stack-col:last-child { border-right: 0; }
+.stack-col h3 { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--accent-ink); margin-bottom: 16px; }
+.stack-col li { padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: 15px; display: flex; justify-content: space-between; gap: 8px; }
+.stack-col li:last-child { border-bottom: 0; }
+.stack-col li span { color: var(--ink-3); font-size: 13px; text-align: right; }
+@media (max-width: 960px) { .stack { grid-template-columns: repeat(2, 1fr); } .stack-col:nth-child(2) { border-right: 0; } .stack-col:nth-child(-n+2) { border-bottom: 1px solid var(--line); } }
+@media (max-width: 560px) { .stack { grid-template-columns: 1fr; } .stack-col { border-right: 0 !important; border-bottom: 1px solid var(--line); } .stack-col:last-child { border-bottom: 0; } }
 
-  #contact { background:var(--bg2);text-align:center;display:flex;flex-direction:column;align-items:center; }
-  .contact-inner { max-width:640px; }
-  .contact-email { font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;background:linear-gradient(135deg,var(--electric-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;display:block;margin:2rem 0;transition:filter .3s; }
-  .contact-email:hover { filter:brightness(1.3); }
-  .social-links { display:flex;gap:2.5rem;justify-content:center;list-style:none;margin:2.5rem 0; }
-  .social-links a { font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s; }
-  .social-links a:hover { color:var(--cyan); }
-  .cv-download { margin-top:2rem;padding:1rem 3rem;border:1px solid var(--electric);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--electric-bright);text-decoration:none;display:inline-block;transition:background .3s,color .3s,box-shadow .3s; }
-  .cv-download:hover { background:var(--electric);color:#fff;box-shadow:0 0 24px rgba(26,111,255,.5); }
+/* Timeline */
+.tl { position: relative; display: grid; gap: 0; }
+.tl-item { display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 26px 0; border-top: 1px solid var(--line); }
+.tl-item:last-child { border-bottom: 1px solid var(--line); }
+.tl-when { font: 500 13px var(--mono); color: var(--ink-3); padding-top: 3px; }
+.tl-type { display: inline-block; margin-top: 8px; font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--accent-ink); }
+.tl-item h3 { font-size: 19px; }
+.tl-org { color: var(--ink-3); font-size: 15px; margin: 2px 0 10px; }
+.tl-item ul { display: grid; gap: 6px; }
+.tl-item li { color: var(--ink-2); font-size: 15px; padding-left: 18px; position: relative; }
+.tl-item li::before { content: ''; position: absolute; left: 2px; top: .7em; width: 6px; height: 1.5px; background: var(--accent); }
+@media (max-width: 700px) { .tl-item { grid-template-columns: 1fr; gap: 8px; } }
 
-  footer { padding:2rem 4rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:.55rem;letter-spacing:.15em;color:rgba(107,122,153,.5);z-index:1;position:relative; }
-  .fade-in { opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s; }
-  .fade-in.visible { opacity:1;transform:translateY(0); }
-  ::-webkit-scrollbar { width:4px; }
-  ::-webkit-scrollbar-track { background:var(--bg); }
-  ::-webkit-scrollbar-thumb { background:var(--electric);border-radius:2px; }
-  @media(max-width:900px){
-    nav{padding:1.2rem 1.5rem;} .nav-links{display:none;}
-    #hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem;}
-    .hero-right{align-items:flex-start;margin-top:3rem;}
-    .photo-wrap{width:240px;height:300px;}
-    section{padding:5rem 1.5rem;}
-    .skills-grid,.projects-grid,.data-tools{grid-template-columns:1fr;}
-    footer{flex-direction:column;gap:1rem;text-align:center;}
-  }
+/* Contact */
+.contact { text-align: left; }
+.contact-box { background: var(--ink); color: var(--bg); border-radius: 24px; padding: clamp(32px, 6vw, 64px); display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: end; }
+.contact-box .kicker { color: var(--accent); }
+.contact-box h2 { font-family: var(--serif); font-size: clamp(32px, 4.6vw, 52px); line-height: 1.05; margin-bottom: 16px; }
+.contact-box p { color: color-mix(in srgb, var(--bg) 72%, transparent); max-width: 48ch; }
+.contact-links { display: grid; gap: 10px; }
+.contact-links a { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px; border: 1px solid color-mix(in srgb, var(--bg) 20%, transparent); border-radius: 12px; text-decoration: none; transition: background .15s, border-color .15s; font-weight: 500; }
+.contact-links a:hover { background: color-mix(in srgb, var(--bg) 8%, transparent); border-color: color-mix(in srgb, var(--bg) 40%, transparent); }
+.contact-links small { display: block; font: 400 12px var(--mono); color: color-mix(in srgb, var(--bg) 60%, transparent); margin-bottom: 2px; }
+.contact-links span.v { word-break: break-all; }
+.contact-links svg { width: 18px; height: 18px; flex: none; }
+@media (max-width: 860px) { .contact-box { grid-template-columns: 1fr; } }
+
+footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
+.foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.foot a { color: var(--ink-2); text-decoration: none; }
+.foot a:hover { color: var(--ink); }
+
+.reveal.pending { opacity: 0; transform: translateY(14px); }
+.reveal { transition: opacity .6s ease, transform .6s ease; }
+
+@media print {
+  header.top, .filters, .nav-tools, .ctas, .portrait-card { display: none !important; }
+  body { background: #fff; color: #000; }
+  section { padding: 24px 0; break-inside: avoid; }
+  .reveal.pending { opacity: 1; transform: none; }
+  .contact-box { background: #fff; color: #000; border: 1px solid #ccc; }
+}
 </style>
 </head>
 <body>
-<div class="glow-orb glow-orb-1"></div>
-<div class="glow-orb glow-orb-2"></div>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<a class="skip" href="#main" data-i18n="skip">Aller au contenu</a>
 
-<nav>
-  <a href="#hero" class="nav-logo">I.S.</a>
-  <ul class="nav-links">
-    <li><a href="#skills"><span data-fr="Compétences" data-en="Skills">Compétences</span></a></li>
-    <li><a href="#data"><span data-fr="Data & IA" data-en="Data & AI">Data & IA</span></a></li>
-    <li><a href="#projects"><span data-fr="Projets" data-en="Projects">Projets</span></a></li>
-    <li><a href="#timeline"><span data-fr="Parcours" data-en="Journey">Parcours</span></a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <button class="lang-toggle" id="langToggle" aria-label="Switch language">
-    <span class="lang-badge" id="langBadge">EN</span>
-    <span class="lang-flag" id="langFlag">🇫🇷</span>
-    <span class="lang-label" id="langLabel">FR</span>
-    <span class="lang-arrow">⇄</span>
-  </button>
-</nav>
-
-<section id="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow"><span data-fr="Data Scientist · Développeur Fullstack" data-en="Data Scientist · Fullstack Developer">Data Scientist · Développeur Fullstack</span></div>
-    <h1 class="hero-name">Ibrahim<br><span class="last">SAVADOGO</span></h1>
-    <p class="hero-title"><span data-fr="Data Science · Django · Flutter" data-en="Data Science · Django · Flutter">Data Science · Django · Flutter</span></p>
-    <p class="hero-desc"><span data-fr="Je transforme la donnée brute en insights actionnables et en produits digitaux robustes. De l'analyse ML en production aux applications web et mobiles performantes." data-en="I turn raw data into actionable insights and robust digital products. From production ML analysis to high-performance web and mobile applications.">Je transforme la donnée brute en insights actionnables et en produits digitaux robustes. De l'analyse ML en production aux applications web et mobiles performantes.</span></p>
-    <div class="hero-ctas">
-      <a href="#contact" class="btn-primary"><span data-fr="Me contacter" data-en="Contact me">Me contacter</span></a>
-      <a href="#projects" class="btn-ghost"><span data-fr="Voir mes projets" data-en="View my projects">Voir mes projets</span></a>
+<header class="top" id="top">
+  <div class="wrap nav">
+    <a class="brand" href="#main" aria-label="Ibrahim Savadogo, accueil">
+      <span class="brand-mark">IS</span><span>Ibrahim Savadogo</span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Navigation principale">
+      <a href="#expertise" data-i18n="nav.expertise">Expertise</a>
+      <a href="#projets" data-i18n="nav.projects">Projets</a>
+      <a href="#stack" data-i18n="nav.stack">Stack</a>
+      <a href="#parcours" data-i18n="nav.journey">Parcours</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="tool-btn" id="langBtn" type="button" aria-label="Switch to English">EN</button>
+      <button class="tool-btn" id="themeBtn" type="button" aria-label="Changer de thème">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="tool-btn menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="photo-wrap">
-      <div class="photo-hex-border"></div>
-      <div class="photo-inner">
-        <img class="photo-img" src="photo_Ibrahim.jpg" alt="Ibrahim SAVADOGO">
-        <div class="photo-scan"></div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="status"><span class="dot" aria-hidden="true"></span><span data-i18n="hero.status">Disponible · CDI ou freelance · Abidjan ou à distance</span></span>
+        <h1 id="hero-title">Ibrahim Savadogo
+          <span class="role" data-i18n="hero.role">Ingénieur logiciel <em>Full Stack</em>, du backend au mobile, de la donnée au capteur.</span>
+        </h1>
+        <p class="lede" data-i18n="hero.lede">Je conçois des applications complètes et maintenables : API Java / Spring Boot et Django, interfaces Angular et Flutter, traitements asynchrones avec RabbitMQ, pipelines de données et systèmes IoT. Mon objectif est simple : livrer un logiciel qui tient en production et qui sert le métier.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#projets"><span data-i18n="hero.cta1">Voir mes projets</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-outline" href="CV.pdf" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-i18n="hero.cta2">Télécharger le CV</span></a>
+          <a class="btn btn-outline" href="https://github.com/ibrahimsava" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>GitHub</a>
+        </div>
       </div>
-      <div class="photo-corner tl"></div>
-      <div class="photo-corner tr"></div>
-      <div class="photo-corner bl"></div>
-      <div class="photo-corner br"></div>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item"><span class="stat-num">1+</span><span class="stat-label"><span data-fr="Années" data-en="Years">Années</span></span></div>
-      <div class="stat-item"><span class="stat-num">12+</span><span class="stat-label"><span data-fr="Projets" data-en="Projects">Projets</span></span></div>
-      <div class="stat-item"><span class="stat-num">99%</span><span class="stat-label">Uptime</span></div>
-    </div>
-    <div class="avail-badge"><span class="avail-dot"></span><span data-fr="Disponible — Freelance & CDI" data-en="Available — Freelance & Full-time">Disponible — Freelance & CDI</span></div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="section-label fade-in"><span data-fr="Compétences" data-en="Skills">Compétences</span></div>
-  <h2 class="section-title fade-in"><span data-fr="Stack" data-en="Tech">Stack</span> <em><span data-fr="Technique" data-en="Stack">Technique</span></em></h2>
-  <div class="section-divider fade-in"></div>
-  <div class="skills-grid fade-in">
-    <div class="skill-cat">
-      <div class="skill-cat-title"><span data-fr="Data Science & IA" data-en="Data Science & AI">Data Science & IA</span></div>
-      <ul class="skill-list">
-        <li class="skill-item">Python / Pandas / NumPy <div class="skill-bar-wrap"><div class="skill-bar" data-w="95"></div></div></li>
-        <li class="skill-item">Power BI / Dataviz <div class="skill-bar-wrap"><div class="skill-bar" data-w="90"></div></div></li>
-        <li class="skill-item">SQL / MySQL <div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></li>
-        <li class="skill-item">HPC <div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></li>
-        <li class="skill-item"><span data-fr="Excel avancé" data-en="Advanced Excel">Excel avancé</span> <div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></li>
-        <li class="skill-item">Machine Learning <div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></li>
-      </ul>
-    </div>
-    <div class="skill-cat">
-      <div class="skill-cat-title"><span data-fr="Développement Web" data-en="Web Development">Développement Web</span></div>
-      <ul class="skill-list">
-        <li class="skill-item">Django / Python <div class="skill-bar-wrap"><div class="skill-bar" data-w="92"></div></div></li>
-        <li class="skill-item">Bootstrap <div class="skill-bar-wrap"><div class="skill-bar" data-w="92"></div></div></li>
-        <li class="skill-item">Django REST Framework <div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></li>
-        <li class="skill-item">HTML / CSS / JS <div class="skill-bar-wrap"><div class="skill-bar" data-w="82"></div></div></li>
-        <li class="skill-item">APIs RESTful <div class="skill-bar-wrap"><div class="skill-bar" data-w="90"></div></div></li>
-        <li class="skill-item">SQLite / MySQL / XAMPP <div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></li>
-      </ul>
-    </div>
-    <div class="skill-cat">
-      <div class="skill-cat-title"><span data-fr="Mobile & Outils" data-en="Mobile & Tools">Mobile & Outils</span></div>
-      <ul class="skill-list">
-        <li class="skill-item">Flutter / Dart <div class="skill-bar-wrap"><div class="skill-bar" data-w="84"></div></div></li>
-        <li class="skill-item">Git / GitHub <div class="skill-bar-wrap"><div class="skill-bar" data-w="90"></div></div></li>
-        <li class="skill-item">Jupyter / Colab <div class="skill-bar-wrap"><div class="skill-bar" data-w="95"></div></div></li>
-      </ul>
-    </div>
-  </div>
-  <div class="skill-tag-wrap fade-in">
-    <span class="skill-tag">Python</span><span class="skill-tag">Django</span><span class="skill-tag">Flutter</span><span class="skill-tag">MySQL</span><span class="skill-tag">Power BI</span><span class="skill-tag">Pandas</span><span class="skill-tag">REST API</span><span class="skill-tag">Git</span><span class="skill-tag">Jupyter</span>
-  </div>
-</section>
-
-<section id="data">
-  <div class="section-label fade-in"><span data-fr="Data & Intelligence Artificielle" data-en="Data & Artificial Intelligence">Data & Intelligence Artificielle</span></div>
-  <h2 class="section-title fade-in"><span data-fr="Outils &" data-en="Tools &">Outils &</span> <em><span data-fr="Expertise Data" data-en="Data Expertise">Expertise Data</span></em></h2>
-  <div class="section-divider fade-in"></div>
-  <div class="data-tools fade-in">
-    <div class="data-tool"><span class="data-tool-icon">🐍</span><div class="data-tool-name">Python</div><div class="data-tool-desc"><span data-fr="Analyse, modélisation ML, automatisation et pipelines de traitement de données." data-en="Analysis, ML modeling, automation and data processing pipelines.">Analyse, modélisation ML, automatisation et pipelines de traitement de données.</span></div></div>
-    <div class="data-tool"><span class="data-tool-icon">📊</span><div class="data-tool-name">Power BI</div><div class="data-tool-desc"><span data-fr="Dashboards interactifs, rapports métier, KPIs et visualisation avancée." data-en="Interactive dashboards, business reports, KPIs and advanced visualization.">Dashboards interactifs, rapports métier, KPIs et visualisation avancée.</span></div></div>
-    <div class="data-tool"><span class="data-tool-icon">🗄️</span><div class="data-tool-name">MySQL</div><div class="data-tool-desc"><span data-fr="Conception BDD, requêtes optimisées, modélisation relationnelle." data-en="Database design, optimized queries, relational modeling.">Conception BDD, requêtes optimisées, modélisation relationnelle.</span></div></div>
-    <div class="data-tool"><span class="data-tool-icon">🤖</span><div class="data-tool-name">Machine Learning</div><div class="data-tool-desc"><span data-fr="Modèles prédictifs, classification, clustering et déploiement production." data-en="Predictive models, classification, clustering and production deployment.">Modèles prédictifs, classification, clustering et déploiement production.</span></div></div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="section-label fade-in"><span data-fr="Réalisations" data-en="Work">Réalisations</span></div>
-  <h2 class="section-title fade-in"><span data-fr="Projets" data-en="Selected">Projets</span> <em><span data-fr="Sélectionnés" data-en="Projects">Sélectionnés</span></em></h2>
-  <div class="section-divider fade-in"></div>
-  <div class="projects-grid fade-in">
-
-    <div class="project-card">
-      <div class="project-num">01</div>
-      <div class="project-type">ERP · Data Science · Machine Learning</div>
-      <h3 class="project-title"><span data-fr="Pipeline ERP Automatisé" data-en="Automated ERP Pipeline">Pipeline ERP Automatisé</span><br>Python + MySQL + ML</h3>
-      <p class="project-desc"><span data-fr="Pipeline complet d'automatisation de données couvrant Ventes, Finance et Logistique. XGBoost, LSTM, 3 modèles ML (régression, K-Means, Isolation Forest), 10 graphiques auto-générés et rapport PDF automatique. R² > 0.85 sur les prévisions de ventes." data-en="Complete data automation pipeline covering Sales, Finance and Logistics. XGBoost, LSTM, 3 ML models (regression, K-Means, Isolation Forest), 10 auto-generated charts and automatic PDF report. R² > 0.85 on sales forecasts.">Pipeline complet d'automatisation de données couvrant Ventes, Finance et Logistique. XGBoost, LSTM, 3 modèles ML (régression, K-Means, Isolation Forest), 10 graphiques auto-générés et rapport PDF automatique. R² > 0.85 sur les prévisions de ventes.</span></p>
-      <div class="project-stack">
-        <span class="project-tag">Python</span><span class="project-tag">MySQL</span><span class="project-tag">Scikit-learn</span><span class="project-tag">Pandas</span><span class="project-tag">ReportLab</span><span class="project-tag">Matplotlib</span>
+      <div class="portrait">
+        <div class="portrait-frame"><img src="photo_Ibrahim.jpg" alt="Portrait d'Ibrahim Savadogo" width="360" height="450" fetchpriority="high"></div>
+        <div class="portrait-card"><strong data-i18n="hero.card1">Master en informatique</strong><span data-i18n="hero.card2">Université Joseph Ki-Zerbo</span></div>
       </div>
-      <a href="https://github.com/ibrahimsava/erp-automatisation-python-ml" target="_blank" class="project-link"><span data-fr="Voir le projet →" data-en="View project →">Voir le projet →</span></a>
     </div>
 
-    <div class="project-card">
-      <div class="project-num">02</div>
-      <div class="project-type">Web · Django · <span data-fr="Gestion Scolaire & E-commerce" data-en="School Management & E-commerce">Gestion Scolaire & E-commerce</span></div>
-      <h3 class="project-title"><span data-fr="Plateforme de Gestion" data-en="Management Platform">Plateforme de Gestion</span><br><span data-fr="Scolaire & Métier" data-en="School & Business">Scolaire & Métier</span></h3>
-      <p class="project-desc"><span data-fr="Application web full-stack Django avec authentification, API REST, interface admin personnalisée et intégration MySQL. Inclut une application de gestion scolaire et une application e-commerce." data-en="Full-stack Django web application with authentication, REST API, custom admin interface and MySQL integration. Includes a school management app and an e-commerce application.">Application web full-stack Django avec authentification, API REST, interface admin personnalisée et intégration MySQL. Inclut une application de gestion scolaire et une application e-commerce.</span></p>
-      <div class="project-stack">
-        <span class="project-tag">Django</span><span class="project-tag">Python</span><span class="project-tag">MySQL</span><span class="project-tag">REST API</span><span class="project-tag">Bootstrap</span>
-      </div>
-      <a href="https://github.com/ibrahimsava/App_gestion_school" target="_blank" class="project-link"><span data-fr="Voir le projet →" data-en="View project →">Voir le projet →</span></a>
-    </div>
-
-    <div class="project-card">
-      <div class="project-num">03</div>
-      <div class="project-type">Mobile · Flutter · IoT</div>
-      <h3 class="project-title"><span data-fr="Application Mobile" data-en="Mobile Application">Application Mobile</span><br><span data-fr="Monitoring Sol en Temps Réel" data-en="Real-Time Soil Monitoring">Monitoring Sol en Temps Réel</span></h3>
-      <p class="project-desc"><span data-fr="Application Flutter multiplateforme (Android) avec interface soignée, sync temps réel et consommation d'APIs REST Django. Monitoring des grandeurs physico-chimiques du sol en temps réel." data-en="Cross-platform Flutter app (Android) with polished UI, real-time sync and Django REST API consumption. Real-time monitoring of soil physicochemical parameters.">Application Flutter multiplateforme (Android) avec interface soignée, sync temps réel et consommation d'APIs REST Django. Monitoring des grandeurs physico-chimiques du sol en temps réel.</span></p>
-      <div class="project-stack">
-        <span class="project-tag">Flutter</span><span class="project-tag">Dart</span><span class="project-tag">Django API</span><span class="project-tag">MySQL</span>
-      </div>
-      <a href="https://github.com/ibrahimsava/site_degestions_des_employes" target="_blank" class="project-link"><span data-fr="Voir le projet →" data-en="View project →">Voir le projet →</span></a>
-    </div>
-
-    <div class="project-card">
-      <div class="project-num">04</div>
-      <div class="project-type">Data Viz · Business Intelligence</div>
-      <h3 class="project-title"><span data-fr="Dashboard BI" data-en="BI Dashboard">Dashboard BI</span><br><span data-fr="& Reporting Automatisé" data-en="& Automated Reporting">& Reporting Automatisé</span></h3>
-      <p class="project-desc"><span data-fr="Tableau de bord Power BI connecté à MySQL avec actualisation automatique, suivi KPIs et analyses pour la prise de décision." data-en="Power BI dashboard connected to MySQL with automatic refresh, KPI tracking and decision-making analytics.">Tableau de bord Power BI connecté à MySQL avec actualisation automatique, suivi KPIs et analyses pour la prise de décision.</span></p>
-      <div class="project-stack">
-        <span class="project-tag">Power BI</span><span class="project-tag">MySQL</span><span class="project-tag">Python</span><span class="project-tag">DAX</span>
-      </div>
-      <a href="https://github.com/ibrahimsava" target="_blank" class="project-link"><span data-fr="Voir le projet →" data-en="View project →">Voir le projet →</span></a>
-    </div>
-
-  </div>
-</section>
-
-<section id="timeline">
-  <div class="section-label fade-in"><span data-fr="Parcours" data-en="Journey">Parcours</span></div>
-  <h2 class="section-title fade-in"><span data-fr="Expérience &" data-en="Experience &">Expérience &</span> <em><span data-fr="Formation" data-en="Education">Formation</span></em></h2>
-  <div class="section-divider fade-in"></div>
-  <div class="timeline-wrap">
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2023 — <span data-fr="Présent" data-en="Present">Présent</span></div>
-      <h3 class="timeline-company"><span data-fr="Poste actuel" data-en="Current Position">Poste actuel</span></h3>
-      <div class="timeline-role"><span data-fr="Stagiaire en Data Science · Développeur Full-Stack" data-en="Data Science Intern · Full-Stack Developer">Stagiaire en Data Science · Développeur Full-Stack</span></div>
-      <p class="timeline-desc"><span data-fr="Développement Django et Flutter, analyses Power BI." data-en="Django and Flutter development, Power BI analytics.">Développement Django et Flutter, analyses Power BI.</span></p>
-      <span class="timeline-badge"><span data-fr="Poste actuel" data-en="Current position">Poste actuel</span></span>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2021 — 2023</div>
-      <h3 class="timeline-company"><span data-fr="Expérience Professionnelle" data-en="Professional Experience">Expérience Professionnelle</span></h3>
-      <div class="timeline-role"><span data-fr="Développeur Python · Data Analyst" data-en="Python Developer · Data Analyst">Développeur Python · Data Analyst</span></div>
-      <p class="timeline-desc"><span data-fr="Développement outils d'analyse, automatisation, applications Django et reporting Power BI." data-en="Development of analysis tools, automation, Django applications and Power BI reporting.">Développement outils d'analyse, automatisation, applications Django et reporting Power BI.</span></p>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2019 — 2021</div>
-      <h3 class="timeline-company"><span data-fr="Formation Supérieure" data-en="Higher Education">Formation Supérieure</span></h3>
-      <div class="timeline-role"><span data-fr="Ingénierie Informatique · Data Science" data-en="Computer Engineering · Data Science">Ingénierie Informatique · Data Science</span></div>
-      <p class="timeline-desc"><span data-fr="Spécialisation en analyse de données, bases de données, développement logiciel et statistiques appliquées." data-en="Specialization in data analysis, databases, software development and applied statistics.">Spécialisation en analyse de données, bases de données, développement logiciel et statistiques appliquées.</span></p>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year"><span data-fr="Certifications" data-en="Certifications">Certifications</span></div>
-      <h3 class="timeline-company"><span data-fr="Formations continues" data-en="Continuous Learning">Formations continues</span></h3>
-      <div class="timeline-role">Power BI · Python · Django · Flutter</div>
-      <p class="timeline-desc"><span data-fr="Formation continue en Data Science, Django REST et développement mobile Flutter." data-en="Continuous training in Data Science, Django REST and Flutter mobile development.">Formation continue en Data Science, Django REST et développement mobile Flutter.</span></p>
+    <div class="facts reveal">
+      <div class="fact"><b>4</b><span data-i18n="facts.1">domaines maîtrisés : web, mobile, data, IoT</span></div>
+      <div class="fact"><b>15+</b><span data-i18n="facts.2">projets publics sur GitHub</span></div>
+      <div class="fact"><b>2</b><span data-i18n="facts.3">expériences en structures de recherche et d'ingénierie</span></div>
+      <div class="fact"><b>FR · EN</b><span data-i18n="facts.4">langues de travail</span></div>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <div class="contact-inner">
-    <div class="section-label fade-in" style="justify-content:center;">Contact</div>
-    <h2 class="section-title fade-in" style="text-align:center;"><span data-fr="Travaillons" data-en="Let's Work">Travaillons</span> <em><span data-fr="Ensemble" data-en="Together">Ensemble</span></em></h2>
-    <div class="section-divider fade-in" style="margin:2rem auto;"></div>
-    <p class="fade-in" style="font-size:.75rem;line-height:1.9;color:rgba(240,244,255,.45);"><span data-fr="Disponible pour des missions Data Science, développement Django, Flutter ou analyses Power BI." data-en="Available for Data Science projects, Django development, Flutter or Power BI analytics.">Disponible pour des missions Data Science, développement Django, Flutter ou analyses Power BI.</span></p>
-    <a href="mailto:savadogoibrahim0915@gmail.com" class="contact-email fade-in">savadogoibrahim0915@gmail.com</a>
-    <ul class="social-links fade-in">
-      <li><a href="https://github.com/ibrahimsava" target="_blank">GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/ibrahim-savadogo-70063128a" target="_blank">LinkedIn</a></li>
-    </ul>
-    <a href="CV.pdf" download class="cv-download fade-in"><span data-fr="↓ Télécharger mon CV" data-en="↓ Download my Resume">↓ Télécharger mon CV</span></a>
+<!-- EXPERTISE -->
+<section id="expertise" class="alt" aria-labelledby="exp-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker" data-i18n="exp.kicker">Ce que j'apporte</span>
+        <h2 id="exp-title" data-i18n="exp.title">Une vision de bout en bout, de la base de données à l'écran.</h2>
+      </div>
+      <p data-i18n="exp.intro">Je ne m'arrête pas à une couche. Je comprends comment les données circulent, où se trouvent les goulots d'étranglement et comment découper un système pour qu'il reste évolutif.</p>
+    </div>
+    <div class="pillars">
+      <article class="pillar reveal">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg></div>
+        <h3 data-i18n="p1.t">Backend & architecture</h3>
+        <p data-i18n="p1.d">API REST en couches claires (contrôleurs, services, DTO, mappers, repositories), sécurité avec Spring Security et BCrypt, messagerie asynchrone avec RabbitMQ, services conteneurisés avec Docker.</p>
+        <div class="chips"><span class="chip">Java 17</span><span class="chip">Spring Boot</span><span class="chip">Spring Security</span><span class="chip">JPA</span><span class="chip">RabbitMQ</span><span class="chip">Django REST</span><span class="chip">PostgreSQL</span><span class="chip">Docker</span></div>
+      </article>
+      <article class="pillar reveal">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="14" height="11" rx="1.5"/><rect x="15" y="8" width="7" height="12" rx="1.5"/><path d="M6 19h6"/></svg></div>
+        <h3 data-i18n="p2.t">Interfaces web & mobile</h3>
+        <p data-i18n="p2.d">Applications Angular structurées en composants, services et routes, avec les signaux pour l'état. Applications Flutter multiplateformes reliées à des API Spring Boot, Django ou Firebase.</p>
+        <div class="chips"><span class="chip">Angular</span><span class="chip">TypeScript</span><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Firebase</span><span class="chip">HTML / CSS</span></div>
+      </article>
+      <article class="pillar reveal">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+        <h3 data-i18n="p3.t">Data, ML & IoT</h3>
+        <p data-i18n="p3.d">Pipelines Python de l'extraction au rapport automatique, modèles scikit-learn, tableaux de bord Power BI, données géospatiales avec Google Earth Engine, calcul haute performance sous Linux et capteurs ESP32.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">scikit-learn</span><span class="chip">SQL</span><span class="chip">Power BI</span><span class="chip">Earth Engine</span><span class="chip">ESP32</span><span class="chip">HPC</span></div>
+      </article>
+    </div>
   </div>
 </section>
+
+<!-- PROJECTS -->
+<section id="projets" aria-labelledby="proj-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker" data-i18n="proj.kicker">Projets sélectionnés</span>
+        <h2 id="proj-title" data-i18n="proj.title">Des problèmes réels, des solutions documentées.</h2>
+      </div>
+      <p data-i18n="proj.intro">Chaque projet présente le contexte, ce que j'ai construit et l'architecture retenue. Le code source est public sur GitHub.</p>
+    </div>
+
+    <!-- Case 1 -->
+    <article class="case reveal">
+      <div class="case-body">
+        <div class="case-meta"><span class="tag" data-i18n="c1.tag">Projet de Master</span><span>IoT · Mobile</span></div>
+        <h3 data-i18n="c1.t">Irrigation intelligente contre le gaspillage d'eau</h3>
+        <p class="case-summary" data-i18n="c1.s">Un système complet qui mesure l'humidité du sol et pilote l'arrosage à distance, pour n'irriguer que lorsque c'est nécessaire.</p>
+        <dl>
+          <div><dt data-i18n="lbl.problem">Problème</dt><dd data-i18n="c1.p">En agriculture, l'arrosage à heures fixes gaspille l'eau et ne tient pas compte de l'état réel du sol.</dd></div>
+          <div><dt data-i18n="lbl.built">Ce que j'ai construit</dt><dd data-i18n="c1.b">Le montage embarqué sur ESP32 et son firmware C++, la synchronisation temps réel via Firebase, et une application Flutter avec tableau de bord, graphiques d'humidité, suivi du volume d'eau, carte des parcelles et commande de la vanne.</dd></div>
+        </dl>
+        <div class="chips"><span class="chip">C++</span><span class="chip">ESP32</span><span class="chip">Firebase</span><span class="chip">Flutter</span><span class="chip">Dart</span></div>
+        <div class="case-links"><a class="link-arrow" href="https://github.com/ibrahimsava/Irrigation-app_for_smart_agric_real" target="_blank" rel="noopener"><span data-i18n="lbl.code">Voir le code</span> ↗</a></div>
+      </div>
+      <div class="case-visual" aria-label="Architecture du système">
+        <span class="flow-title" data-i18n="lbl.arch">Architecture</span>
+        <div class="flow">
+          <div class="node"><span class="node-n">1</span><div><b data-i18n="c1.n1">Capteurs + ESP32</b><small data-i18n="c1.n1s">Humidité du sol, débit, commande de vanne</small></div></div>
+          <div class="edge"></div>
+          <div class="node"><span class="node-n">2</span><div><b>Firebase</b><small data-i18n="c1.n2s">Base temps réel et authentification</small></div></div>
+          <div class="edge"></div>
+          <div class="node"><span class="node-n">3</span><div><b data-i18n="c1.n3">Application Flutter</b><small data-i18n="c1.n3s">Tableau de bord, graphiques, carte, pilotage</small></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 2 -->
+    <article class="case reveal">
+      <div class="case-body">
+        <div class="case-meta"><span class="tag" data-i18n="c2.tag">Data engineering</span><span>Python · ML</span></div>
+        <h3 data-i18n="c2.t">Pipeline ERP automatisé, de la base de données à la décision</h3>
+        <p class="case-summary" data-i18n="c2.s">Un pipeline en six étapes qui transforme les données brutes d'un ERP en rapport PDF de décision, sans aucune intervention manuelle.</p>
+        <dl>
+          <div><dt data-i18n="lbl.problem">Problème</dt><dd data-i18n="c2.p">Les équipes ventes, finance et logistique passent du temps à extraire et consolider des données au lieu de les exploiter.</dd></div>
+          <div><dt data-i18n="lbl.built">Ce que j'ai construit</dt><dd data-i18n="c2.b">Un modèle relationnel MySQL de 8 tables, l'extraction et l'analyse avec Pandas, trois modèles scikit-learn (prévision des ventes par régression avec un R² supérieur à 0,85, segmentation client K-Means, détection d'anomalies Isolation Forest), puis 10 graphiques et un rapport PDF générés automatiquement.</dd></div>
+        </dl>
+        <div class="chips"><span class="chip">Python</span><span class="chip">MySQL</span><span class="chip">Pandas</span><span class="chip">scikit-learn</span><span class="chip">Matplotlib</span><span class="chip">ReportLab</span></div>
+        <div class="case-links"><a class="link-arrow" href="https://github.com/ibrahimsava/erp-automatisation-python-ml" target="_blank" rel="noopener"><span data-i18n="lbl.code">Voir le code</span> ↗</a></div>
+      </div>
+      <div class="case-visual">
+        <span class="flow-title" data-i18n="lbl.pipeline">Pipeline</span>
+        <div class="flow">
+          <div class="node"><span class="node-n">1</span><div><b data-i18n="c2.n1">MySQL · 8 tables</b><small data-i18n="c2.n1s">Ventes, finance, stocks</small></div></div>
+          <div class="edge"></div>
+          <div class="node"><span class="node-n">2</span><div><b data-i18n="c2.n2">Extraction & analyse</b><small>Pandas, Seaborn</small></div></div>
+          <div class="edge"></div>
+          <div class="node"><span class="node-n">3</span><div><b data-i18n="c2.n3">Machine learning</b><small data-i18n="c2.n3s">Régression, K-Means, Isolation Forest</small></div></div>
+          <div class="edge"></div>
+          <div class="node"><span class="node-n">4</span><div><b data-i18n="c2.n4">Rapport PDF + CSV</b><small data-i18n="c2.n4s">Généré à chaque exécution</small></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 3 -->
+    <article class="case reveal">
+      <div class="case-body">
+        <div class="case-meta"><span class="tag" data-i18n="c3.tag">Architecture asynchrone</span><span>Java · Spring Boot</span></div>
+        <h3 data-i18n="c3.t">Notifications par file de messages avec RabbitMQ</h3>
+        <p class="case-summary" data-i18n="c3.s">Une inscription utilisateur qui répond immédiatement, pendant que l'e-mail de bienvenue est traité en arrière-plan.</p>
+        <dl>
+          <div><dt data-i18n="lbl.problem">Problème</dt><dd data-i18n="c3.p">Envoyer un e-mail de façon synchrone ralentit l'API et fait échouer l'inscription si le serveur SMTP est indisponible.</dd></div>
+          <div><dt data-i18n="lbl.built">Ce que j'ai construit</dt><dd data-i18n="c3.b">Un producteur Spring Boot qui publie un événement à l'inscription, un exchange et une file RabbitMQ, et un consommateur dédié à l'envoi des e-mails. PostgreSQL et RabbitMQ tournent dans Docker Compose.</dd></div>
+        </dl>
+        <div class="chips"><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">RabbitMQ</span><span class="chip">PostgreSQL</span><span class="chip">Docker Compose</span></div>
+        <div class="case-links"><a class="link-arrow" href="https://github.com/ibrahimsava/RabitMq" target="_blank" rel="noopener"><span data-i18n="lbl.code">Voir le code</span> ↗</a></div>
+      </div>
+      <div class="case-visual">
+        <span class="flow-title" data-i18n="lbl.flowmsg">Flux des messages</span>
+        <div class="flow">
+          <div class="node"><span class="node-n">1</span><div><b data-i18n="c3.n1">API d'inscription</b><small data-i18n="c3.n1s">Enregistre l'utilisateur, publie l'événement</small></div></div>
+          <div class="edge"></div>
+          <div class="node"><span class="node-n">2</span><div><b data-i18n="c3.n2">Exchange + file RabbitMQ</b><small data-i18n="c3.n2s">Routage et stockage des messages</small></div></div>
+          <div class="edge"></div>
+          <div class="node"><span class="node-n">3</span><div><b data-i18n="c3.n3">Consommateur e-mail</b><small data-i18n="c3.n3s">Envoi découplé et résilient</small></div></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="more-head reveal">
+      <h3 data-i18n="more.t">Autres réalisations</h3>
+      <div class="filters" role="group" aria-label="Filtrer les projets">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true" data-i18n="f.all">Tous</button>
+        <button class="filter" type="button" data-filter="backend" aria-pressed="false">Backend</button>
+        <button class="filter" type="button" data-filter="web" aria-pressed="false">Web</button>
+        <button class="filter" type="button" data-filter="mobile" aria-pressed="false">Mobile</button>
+      </div>
+    </div>
+
+    <div class="grid" id="projectGrid">
+      <a class="card reveal" data-cat="web backend" href="https://github.com/ibrahimsava/App_gestion_school" target="_blank" rel="noopener">
+        <div class="card-top"><span>Django</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
+        <h4 data-i18n="g1.t">Plateforme de gestion scolaire</h4>
+        <p data-i18n="g1.d">Sept modules Django : comptes, scolarité, présences, emplois du temps, frais, bibliothèque et communication. Préparée pour le déploiement.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Django</span><span class="chip">MySQL</span><span class="chip">Bootstrap</span></div>
+      </a>
+      <a class="card reveal" data-cat="mobile backend" href="https://github.com/ibrahimsava/auth_flutter-" target="_blank" rel="noopener">
+        <div class="card-top"><span>Flutter × Spring</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
+        <h4 data-i18n="g2.t">Authentification mobile full stack</h4>
+        <p data-i18n="g2.d">Inscription et connexion Flutter reliées à une API Spring Boot, mots de passe hachés avec BCrypt et gestion des erreurs métier. JWT et OAuth2 sont prévus.</p>
+        <div class="chips"><span class="chip">Flutter</span><span class="chip">Spring Boot</span><span class="chip">BCrypt</span><span class="chip">MySQL</span></div>
+      </a>
+      <a class="card reveal" data-cat="backend" href="https://github.com/ibrahimsava/First_Project_JAVA" target="_blank" rel="noopener">
+        <div class="card-top"><span>Spring Boot</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
+        <h4 data-i18n="g3.t">Architecture d'une application bancaire</h4>
+        <p data-i18n="g3.d">Comptes, transactions et utilisateurs organisés en couches : entités, DTO, mappers, repositories, interfaces de services et implémentations. Une base pensée pour évoluer.</p>
+        <div class="chips"><span class="chip">Java</span><span class="chip">Spring Data JPA</span><span class="chip">Maven</span></div>
+      </a>
+      <a class="card reveal" data-cat="web backend" href="https://github.com/ibrahimsava/angular_app_calculemoyenne" target="_blank" rel="noopener">
+        <div class="card-top"><span>Angular × Spring</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
+        <h4 data-i18n="g4.t">Gestion des élèves et des notes</h4>
+        <p data-i18n="g4.d">Frontend Angular avec routes, formulaires et signaux, relié à une API REST Spring Boot et MySQL pour le calcul des moyennes.</p>
+        <div class="chips"><span class="chip">Angular</span><span class="chip">TypeScript</span><span class="chip">Spring Boot</span><span class="chip">MySQL</span></div>
+      </a>
+      <a class="card reveal" data-cat="backend" href="https://github.com/ibrahimsava/Fisrt_java_Email_send" target="_blank" rel="noopener">
+        <div class="card-top"><span>Spring Boot</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
+        <h4 data-i18n="g5.t">Tickets de support avec confirmation e-mail</h4>
+        <p data-i18n="g5.d">API REST qui valide et enregistre un ticket, puis envoie automatiquement un e-mail de confirmation au client via Spring Mail.</p>
+        <div class="chips"><span class="chip">Spring Boot 3</span><span class="chip">JPA</span><span class="chip">Spring Mail</span><span class="chip">Lombok</span></div>
+      </a>
+      <a class="card reveal" data-cat="web" href="https://github.com/ibrahimsava/site_degestions_des_employes" target="_blank" rel="noopener">
+        <div class="card-top"><span>Django</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
+        <h4 data-i18n="g6.t">Gestion des employés pour les RH</h4>
+        <p data-i18n="g6.d">Application web qui permet aux RH d'ajouter, modifier et consulter les employés et les départements, avec formulaires validés côté serveur.</p>
+        <div class="chips"><span class="chip">Django</span><span class="chip">Python</span><span class="chip">HTML / CSS</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NOW -->
+<section class="alt" aria-labelledby="now-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker" data-i18n="now.kicker">En ce moment</span>
+        <h2 id="now-title" data-i18n="now.title">Ce sur quoi je travaille.</h2>
+      </div>
+      <p data-i18n="now.intro">Je continue de monter en compétence sur des architectures distribuées, avec des projets qui ressemblent à des besoins de production.</p>
+    </div>
+    <div class="now">
+      <article class="now-item reveal">
+        <span class="kicker" data-i18n="now1.k">Microservices</span>
+        <h3 data-i18n="now1.t">Plateforme de microfinance</h3>
+        <p data-i18n="now1.d">Des microservices Spring Boot qui communiquent par RabbitMQ, une interface Angular et un déploiement conteneurisé avec Docker.</p>
+        <div class="chips" style="margin-top:14px"><span class="chip">Spring Boot</span><span class="chip">Angular</span><span class="chip">RabbitMQ</span><span class="chip">Docker</span></div>
+      </article>
+      <article class="now-item reveal">
+        <span class="kicker" data-i18n="now2.k">Conception</span>
+        <h3 data-i18n="now2.t">Plateforme de transport et de livraison</h3>
+        <p data-i18n="now2.d">Mise en relation de clients et de convoyeurs, avec offres de prix, suivi en temps réel et paiement Mobile Money. Cahier des charges et modèle de données rédigés.</p>
+        <div class="chips" style="margin-top:14px"><span class="chip">Django REST</span><span class="chip">Channels</span><span class="chip">PostGIS</span><span class="chip">Redis</span><span class="chip">Flutter</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack" aria-labelledby="stack-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker" data-i18n="stack.kicker">Stack technique</span>
+        <h2 id="stack-title" data-i18n="stack.title">Les outils que j'utilise au quotidien.</h2>
+      </div>
+    </div>
+    <div class="stack reveal">
+      <div class="stack-col">
+        <h3>Backend</h3>
+        <ul>
+          <li>Java / Spring Boot <span>Security, JPA, Mail</span></li>
+          <li>Python / Django <span>DRF</span></li>
+          <li>RabbitMQ <span data-i18n="st.async">asynchrone</span></li>
+          <li>API REST</li>
+          <li>Maven</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h3>Frontend & mobile</h3>
+        <ul>
+          <li>Angular <span>TypeScript</span></li>
+          <li>Flutter <span>Dart</span></li>
+          <li>Firebase</li>
+          <li>HTML / CSS / JS</li>
+          <li>Bootstrap</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h3 data-i18n="st.data">Data & bases</h3>
+        <ul>
+          <li>PostgreSQL / MySQL</li>
+          <li>Pandas / NumPy</li>
+          <li>scikit-learn</li>
+          <li>Power BI <span>DAX</span></li>
+          <li>Google Earth Engine</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h3 data-i18n="st.infra">Infra & outils</h3>
+        <ul>
+          <li>Docker / Compose</li>
+          <li>Git / GitHub</li>
+          <li>Linux / HPC</li>
+          <li>ESP32 / Arduino <span>C++</span></li>
+          <li>IntelliJ · VS Code · Postman</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="parcours" class="alt" aria-labelledby="tl-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker" data-i18n="tl.kicker">Parcours</span>
+        <h2 id="tl-title" data-i18n="tl.title">Expérience et formation.</h2>
+      </div>
+      <p data-i18n="tl.intro">Un parcours scientifique qui m'a donné la rigueur, puis une spécialisation en informatique orientée terrain.</p>
+    </div>
+    <div class="tl">
+      <div class="tl-item reveal">
+        <div class="tl-when"><span data-i18n="tl0.w">2025 · aujourd'hui</span><br><span class="tl-type" data-i18n="lbl.dev">Développement</span></div>
+        <div>
+          <h3 data-i18n="tl0.t">Développeur Full Stack</h3>
+          <p class="tl-org" data-i18n="tl0.o">Projets indépendants · Abidjan</p>
+          <ul>
+            <li data-i18n="tl0.1">Conception d'API Spring Boot sécurisées et d'architectures asynchrones avec RabbitMQ et Docker.</li>
+            <li data-i18n="tl0.2">Développement de fronts Angular et d'applications mobiles Flutter connectés à ces API.</li>
+            <li data-i18n="tl0.3">Documentation systématique des projets pour faciliter la reprise par une équipe.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when"><span>01/2025 · 07/2025</span><br><span class="tl-type" data-i18n="lbl.intern">Stage</span></div>
+        <div>
+          <h3 data-i18n="tl1.t">Stagiaire ingénieur IoT & data</h3>
+          <p class="tl-org">WASCAL · Burkina Faso</p>
+          <ul>
+            <li data-i18n="tl1.1">Conception d'un système embarqué IoT pour la collecte de données environnementales en temps réel.</li>
+            <li data-i18n="tl1.2">Développement de l'application mobile de supervision avec Flutter.</li>
+            <li data-i18n="tl1.3">Scripts Python de nettoyage et d'analyse de données climatiques, stockage SQL et tableaux de bord.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when"><span>01/2024 · 07/2025</span><br><span class="tl-type" data-i18n="lbl.exp">Expérience</span></div>
+        <div>
+          <h3 data-i18n="tl2.t">Data engineering & développement</h3>
+          <p class="tl-org">Ouaga Centre de Compétence · Ouagadougou</p>
+          <ul>
+            <li data-i18n="tl2.1">Conception de flux de traitement de données : nettoyage, transformation et intégration.</li>
+            <li data-i18n="tl2.2">Tableaux de bord et suivi des KPI avec Power BI, requêtes SQL avancées.</li>
+            <li data-i18n="tl2.3">Développement web Django et mobile Flutter, traitement géospatial avec Google Earth Engine et calcul HPC sous Linux.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when"><span>11/2024</span><br><span class="tl-type" data-i18n="lbl.program">Programme</span></div>
+        <div>
+          <h3>AI for Climate & Weather Forecasting</h3>
+          <p class="tl-org">AIMS · Sénégal</p>
+          <ul>
+            <li data-i18n="tl3.1">Formation au machine learning appliqué au climat et à la prévision météorologique.</li>
+            <li data-i18n="tl3.2">Prétraitement, modélisation prédictive et visualisation sur des jeux de données climatiques.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when"><span>2023 · 2025</span><br><span class="tl-type" data-i18n="lbl.edu">Formation</span></div>
+        <div>
+          <h3 data-i18n="tl4.t">Master en informatique</h3>
+          <p class="tl-org">Université Joseph Ki-Zerbo · Burkina Faso</p>
+          <ul>
+            <li data-i18n="tl4.1">Mémoire sur les systèmes embarqués, appliqué à l'irrigation intelligente.</li>
+            <li data-i18n="tl4.2">Projets web en équipe et modélisation de variables climatiques : température, précipitations, vagues de chaleur.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when"><span>2018 · 2020</span><br><span class="tl-type" data-i18n="lbl.edu">Formation</span></div>
+        <div>
+          <h3 data-i18n="tl5.t">Licence en physique-chimie</h3>
+          <p class="tl-org">Université Félix Houphouët-Boigny · Abidjan</p>
+          <ul>
+            <li data-i18n="tl5.1">Une base scientifique solide en modélisation, mesure et raisonnement quantitatif.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <div>
+        <span class="kicker" data-i18n="ct.kicker">Contact</span>
+        <h2 id="contact-title" data-i18n="ct.title">Construisons quelque chose de solide.</h2>
+        <p data-i18n="ct.d">Je suis ouvert à un poste en CDI ou à des missions freelance en développement backend Java, full stack Angular ou mobile Flutter. Je réponds sous 24 heures.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:savadogoibrahim0915@gmail.com"><span><small>E-mail</small><span class="v">savadogoibrahim0915@gmail.com</span></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a href="https://www.linkedin.com/in/ibrahim-savadogo-70063128a" target="_blank" rel="noopener"><span><small>LinkedIn</small>Ibrahim Savadogo</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a href="https://github.com/ibrahimsava" target="_blank" rel="noopener"><span><small>GitHub</small>@ibrahimsava</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a href="CV.pdf" download><span><small>CV</small><span data-i18n="ct.cv">Télécharger en PDF</span></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
 
 <footer>
-  <span>© 2026 Ibrahim SAVADOGO</span>
-  <span><span data-fr="Data Scientist · Développeur" data-en="Data Scientist · Developer">Data Scientist · Développeur</span></span>
+  <div class="wrap foot">
+    <span>© <span id="year">2026</span> Ibrahim Savadogo · Abidjan, Côte d'Ivoire</span>
+    <a href="#top" data-i18n="ft.top">Retour en haut ↑</a>
+  </div>
 </footer>
 
 <script>
-// ── Cursor ──
-const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-(function a(){cursor.style.transform=`translate(${mx-5}px,${my-5}px)`;rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx-18}px,${ry-18}px)`;requestAnimationFrame(a);})();
-document.querySelectorAll('a,button,.project-card,.data-tool').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.width='54px';ring.style.height='54px';});
-  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';});
-});
+(function () {
+  var root = document.documentElement;
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
 
-// ── Scroll animations ──
-const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.15});
-document.querySelectorAll('.fade-in,.timeline-item').forEach(el=>obs.observe(el));
-const bObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.querySelectorAll('.skill-bar').forEach(b=>b.style.width=b.dataset.w+'%');bObs.unobserve(x.target);}});},{threshold:.3});
-document.querySelectorAll('.skills-grid').forEach(el=>{el.querySelectorAll('.skill-bar').forEach(b=>b.style.width='0');bObs.observe(el);});
-window.addEventListener('scroll',()=>{let c='';document.querySelectorAll('section[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.id;});document.querySelectorAll('.nav-links a').forEach(a=>{a.style.color=a.getAttribute('href')==='#'+c?'var(--cyan)':'';});});
+  /* Theme */
+  var themeBtn = document.getElementById('themeBtn');
+  var savedTheme = store.get('theme');
+  if (savedTheme) root.setAttribute('data-theme', savedTheme);
+  themeBtn.addEventListener('click', function () {
+    var current = root.getAttribute('data-theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    store.set('theme', next);
+  });
 
-// ── Language Toggle ──
-let currentLang = 'fr';
-const toggle = document.getElementById('langToggle');
-const langFlag = document.getElementById('langFlag');
-const langLabel = document.getElementById('langLabel');
-const langBadge = document.getElementById('langBadge');
+  /* Mobile menu */
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', function () {
+    var open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+  });
 
-function applyLang(lang) {
-  document.body.classList.add('translating');
-  setTimeout(() => {
-    document.querySelectorAll('[data-fr][data-en]').forEach(el => {
-      el.textContent = lang === 'en' ? el.dataset.en : el.dataset.fr;
+  /* Header border on scroll */
+  var header = document.getElementById('top');
+  var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* Active nav link */
+  var links = Array.prototype.slice.call(navLinks.querySelectorAll('a'));
+  if ('IntersectionObserver' in window) {
+    var secObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id); });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    links.forEach(function (a) { var s = document.querySelector(a.getAttribute('href')); if (s) secObs.observe(s); });
+
+  }
+
+
+  /* Reveal: only elements below the fold start hidden; a rect check on scroll reveals them */
+  var pending = [];
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add('pending'); pending.push(el); }
     });
-    if (lang === 'en') {
-      langFlag.textContent = '🇬🇧';
-      langLabel.textContent = 'EN';
-      langBadge.textContent = 'FR';
-      document.documentElement.lang = 'en';
-    } else {
-      langFlag.textContent = '🇫🇷';
-      langLabel.textContent = 'FR';
-      langBadge.textContent = 'EN';
-      document.documentElement.lang = 'fr';
-    }
-    document.body.classList.remove('translating');
-  }, 150);
-}
+  }
+  var ticking = false;
+  function check() {
+    ticking = false;
+    var limit = window.innerHeight * 0.95;
+    pending = pending.filter(function (el) {
+      if (el.hidden || el.getBoundingClientRect().top < limit) { el.classList.remove('pending'); return false; }
+      return true;
+    });
+  }
+  function queue() { if (!ticking) { ticking = true; requestAnimationFrame(check); } }
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  window.addEventListener('hashchange', function () { setTimeout(check, 50); });
+  window.addEventListener('load', check);
+  setTimeout(function () { pending.forEach(function (el) { el.classList.remove('pending'); }); pending = []; }, 4000);
 
-toggle.addEventListener('click', () => {
-  toggle.classList.add('switching');
-  currentLang = currentLang === 'fr' ? 'en' : 'fr';
-  applyLang(currentLang);
-  setTimeout(() => toggle.classList.remove('switching'), 300);
-});
+  /* Project filter */
+  var filters = document.querySelectorAll('.filter');
+  var cards = document.querySelectorAll('#projectGrid .card');
+  filters.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var f = btn.getAttribute('data-filter');
+      filters.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      cards.forEach(function (c) {
+        var show = f === 'all' || c.getAttribute('data-cat').split(' ').indexOf(f) !== -1;
+        c.hidden = !show;
+        if (show) c.classList.remove('pending');
+      });
+    });
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* i18n */
+  var EN = {
+    'skip': 'Skip to content',
+    'nav.expertise': 'Expertise', 'nav.projects': 'Projects', 'nav.stack': 'Stack', 'nav.journey': 'Journey', 'nav.contact': 'Contact',
+    'hero.status': 'Available · Full-time or freelance · Abidjan or remote',
+    'hero.role': '<em>Full Stack</em> software engineer, from backend to mobile, from data to sensors.',
+    'hero.lede': 'I build complete, maintainable applications: Java / Spring Boot and Django APIs, Angular and Flutter interfaces, asynchronous processing with RabbitMQ, data pipelines and IoT systems. My goal is simple: ship software that holds up in production and serves the business.',
+    'hero.cta1': 'See my projects', 'hero.cta2': 'Download my CV',
+    'hero.card1': "Master's in Computer Science", 'hero.card2': 'Joseph Ki-Zerbo University',
+    'facts.1': 'domains covered: web, mobile, data, IoT', 'facts.2': 'public projects on GitHub',
+    'facts.3': 'roles in research and engineering organisations', 'facts.4': 'working languages',
+    'exp.kicker': 'What I bring', 'exp.title': 'An end-to-end view, from the database to the screen.',
+    'exp.intro': "I don't stop at one layer. I understand how data flows, where the bottlenecks are, and how to split a system so it keeps scaling.",
+    'p1.t': 'Backend & architecture',
+    'p1.d': 'REST APIs with clear layers (controllers, services, DTOs, mappers, repositories), security with Spring Security and BCrypt, asynchronous messaging with RabbitMQ, containerised services with Docker.',
+    'p2.t': 'Web & mobile interfaces',
+    'p2.d': 'Angular applications structured into components, services and routes, using signals for state. Cross-platform Flutter apps connected to Spring Boot, Django or Firebase backends.',
+    'p3.t': 'Data, ML & IoT',
+    'p3.d': 'Python pipelines from extraction to automated reports, scikit-learn models, Power BI dashboards, geospatial data with Google Earth Engine, high-performance computing on Linux and ESP32 sensors.',
+    'proj.kicker': 'Selected work', 'proj.title': 'Real problems, documented solutions.',
+    'proj.intro': 'Each project shows the context, what I built and the architecture I chose. Source code is public on GitHub.',
+    'lbl.problem': 'Problem', 'lbl.built': 'What I built', 'lbl.code': 'View the code', 'lbl.arch': 'Architecture',
+    'lbl.pipeline': 'Pipeline', 'lbl.flowmsg': 'Message flow',
+    'c1.tag': "Master's project", 'c1.t': 'Smart irrigation to stop water waste',
+    'c1.s': 'A complete system that measures soil moisture and controls irrigation remotely, so fields are watered only when needed.',
+    'c1.p': 'Fixed-schedule irrigation wastes water and ignores the actual state of the soil.',
+    'c1.b': 'The ESP32 hardware and its C++ firmware, real-time sync through Firebase, and a Flutter app with a dashboard, moisture charts, water-volume tracking, a field map and valve control.',
+    'c1.n1': 'Sensors + ESP32', 'c1.n1s': 'Soil moisture, flow, valve control', 'c1.n2s': 'Real-time database and authentication',
+    'c1.n3': 'Flutter app', 'c1.n3s': 'Dashboard, charts, map, control',
+    'c2.tag': 'Data engineering', 'c2.t': 'Automated ERP pipeline, from database to decision',
+    'c2.s': 'A six-step pipeline that turns raw ERP data into a decision-ready PDF report, with zero manual work.',
+    'c2.p': 'Sales, finance and logistics teams spend time extracting and consolidating data instead of using it.',
+    'c2.b': 'An 8-table MySQL relational model, extraction and analysis with Pandas, three scikit-learn models (regression sales forecasting with R² above 0.85, K-Means customer segmentation, Isolation Forest anomaly detection), then 10 charts and a PDF report generated automatically.',
+    'c2.n1': 'MySQL · 8 tables', 'c2.n1s': 'Sales, finance, inventory', 'c2.n2': 'Extraction & analysis',
+    'c2.n3': 'Machine learning', 'c2.n3s': 'Regression, K-Means, Isolation Forest', 'c2.n4': 'PDF report + CSV', 'c2.n4s': 'Generated on every run',
+    'c3.tag': 'Asynchronous architecture', 'c3.t': 'Message-queue notifications with RabbitMQ',
+    'c3.s': 'User sign-up responds instantly while the welcome e-mail is processed in the background.',
+    'c3.p': 'Sending e-mail synchronously slows the API down and breaks sign-up whenever the SMTP server is unavailable.',
+    'c3.b': 'A Spring Boot producer that publishes an event on sign-up, a RabbitMQ exchange and queue, and a dedicated consumer that sends the e-mails. PostgreSQL and RabbitMQ run in Docker Compose.',
+    'c3.n1': 'Sign-up API', 'c3.n1s': 'Saves the user, publishes the event', 'c3.n2': 'RabbitMQ exchange + queue',
+    'c3.n2s': 'Message routing and storage', 'c3.n3': 'E-mail consumer', 'c3.n3s': 'Decoupled, resilient delivery',
+    'more.t': 'More work', 'f.all': 'All',
+    'g1.t': 'School management platform', 'g1.d': 'Seven Django modules: accounts, academics, attendance, timetables, fees, library and communication. Ready for deployment.',
+    'g2.t': 'Full stack mobile authentication', 'g2.d': 'Flutter sign-up and login connected to a Spring Boot API, BCrypt-hashed passwords and business error handling. JWT and OAuth2 are on the roadmap.',
+    'g3.t': 'Banking application architecture', 'g3.d': 'Accounts, transactions and users organised in layers: entities, DTOs, mappers, repositories, service interfaces and implementations. A foundation built to grow.',
+    'g4.t': 'Student and grade management', 'g4.d': 'Angular frontend with routing, forms and signals, backed by a Spring Boot REST API and MySQL to compute averages.',
+    'g5.t': 'Support tickets with e-mail confirmation', 'g5.d': 'REST API that validates and stores a ticket, then automatically e-mails a confirmation to the customer through Spring Mail.',
+    'g6.t': 'Employee management for HR', 'g6.d': 'Web app that lets HR add, edit and browse employees and departments, with server-side form validation.',
+    'now.kicker': 'Right now', 'now.title': "What I'm working on.",
+    'now.intro': "I keep levelling up on distributed architectures, through projects shaped like real production needs.",
+    'now1.k': 'Microservices', 'now1.t': 'Microfinance platform', 'now1.d': 'Spring Boot microservices communicating over RabbitMQ, an Angular interface and a containerised Docker deployment.',
+    'now2.k': 'Design', 'now2.t': 'Ride and delivery platform', 'now2.d': 'Matching customers with couriers, with price bids, real-time tracking and Mobile Money payments. Specification and data model written.',
+    'stack.kicker': 'Tech stack', 'stack.title': 'The tools I use every day.',
+    'st.async': 'asynchronous', 'st.data': 'Data & databases', 'st.infra': 'Infra & tools',
+    'tl.kicker': 'Journey', 'tl.title': 'Experience and education.',
+    'tl.intro': 'A science background that gave me rigour, followed by a hands-on specialisation in computer science.',
+    'lbl.dev': 'Development', 'lbl.intern': 'Internship', 'lbl.exp': 'Experience', 'lbl.program': 'Programme', 'lbl.edu': 'Education',
+    'tl0.w': '2025 · present', 'tl0.t': 'Full Stack Developer', 'tl0.o': 'Independent projects · Abidjan',
+    'tl0.1': 'Designing secure Spring Boot APIs and asynchronous architectures with RabbitMQ and Docker.',
+    'tl0.2': 'Building Angular frontends and Flutter mobile apps connected to those APIs.',
+    'tl0.3': 'Documenting every project so a team can pick it up easily.',
+    'tl1.t': 'IoT & data engineering intern',
+    'tl1.1': 'Designed an IoT embedded system for real-time environmental data collection.',
+    'tl1.2': 'Built the Flutter mobile monitoring app.',
+    'tl1.3': 'Python scripts for cleaning and analysing climate data, SQL storage and dashboards.',
+    'tl2.t': 'Data engineering & development',
+    'tl2.1': 'Designed data processing workflows: cleaning, transformation and integration.',
+    'tl2.2': 'Power BI dashboards and KPI monitoring, advanced SQL queries.',
+    'tl2.3': 'Django web and Flutter mobile development, geospatial processing with Google Earth Engine and HPC on Linux.',
+    'tl3.1': 'Training in machine learning applied to climate and weather forecasting.',
+    'tl3.2': 'Preprocessing, predictive modelling and visualisation on climate datasets.',
+    'tl4.t': "Master's in Computer Science",
+    'tl4.1': 'Thesis on embedded systems, applied to smart irrigation.',
+    'tl4.2': 'Team web projects and modelling of climate variables: temperature, rainfall, heatwaves.',
+    'tl5.t': 'Bachelor in Physics & Chemistry',
+    'tl5.1': 'A solid scientific foundation in modelling, measurement and quantitative reasoning.',
+    'ct.kicker': 'Contact', 'ct.title': "Let's build something solid.",
+    'ct.d': "I'm open to a full-time role or freelance work in Java backend, Angular full stack or Flutter mobile development. I reply within 24 hours.",
+    'ct.cv': 'Download as PDF', 'ft.top': 'Back to top ↑'
+  };
+  var nodes = document.querySelectorAll('[data-i18n]');
+  var FR = {};
+  nodes.forEach(function (n) { FR[n.getAttribute('data-i18n')] = n.innerHTML; });
+  var langBtn = document.getElementById('langBtn');
+  var meta = {
+    fr: { title: 'Ibrahim Savadogo · Ingénieur logiciel Full Stack', btn: 'EN', aria: 'Switch to English' },
+    en: { title: 'Ibrahim Savadogo · Full Stack Software Engineer', btn: 'FR', aria: 'Passer en français' }
+  };
+  function setLang(lang) {
+    var dict = lang === 'en' ? EN : FR;
+    nodes.forEach(function (n) { var k = n.getAttribute('data-i18n'); if (dict[k] != null) n.innerHTML = dict[k]; });
+    root.setAttribute('lang', lang);
+    document.title = meta[lang].title;
+    langBtn.textContent = meta[lang].btn;
+    langBtn.setAttribute('aria-label', meta[lang].aria);
+    store.set('lang', lang);
+  }
+  langBtn.addEventListener('click', function () { setLang(root.getAttribute('lang') === 'en' ? 'fr' : 'en'); });
+  var initial = store.get('lang') || ((navigator.language || 'fr').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en');
+  if (initial === 'en') setLang('en');
+})();
 </script>
 </body>
 </html>
