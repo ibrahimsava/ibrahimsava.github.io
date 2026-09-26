@@ -133,9 +133,6 @@ header.top.scrolled { border-bottom-color: var(--line); }
 .portrait { position: relative; justify-self: end; width: 100%; max-width: 360px; }
 .portrait-frame { aspect-ratio: 4/5; border-radius: 22px; overflow: hidden; background: var(--surface-2); border: 1px solid var(--line); box-shadow: var(--shadow); }
 .portrait-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-.portrait-card { position: absolute; left: -28px; bottom: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); font-size: 13px; line-height: 1.4; }
-.portrait-card strong { display: block; font-size: 14px; }
-.portrait-card span { color: var(--ink-3); }
 .facts { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 56px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
 .fact { padding: 20px 22px; border-right: 1px solid var(--line); }
 .fact:last-child { border-right: 0; }
@@ -145,7 +142,6 @@ header.top.scrolled { border-bottom-color: var(--line); }
   .hero { padding-top: 40px; }
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .portrait { justify-self: start; max-width: 300px; }
-  .portrait-card { left: auto; right: -12px; }
   .facts { grid-template-columns: repeat(2, 1fr); }
   .fact:nth-child(2) { border-right: 0; }
   .fact:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
@@ -271,10 +267,125 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
 .foot a:hover { color: var(--ink); }
 
 .reveal.pending { opacity: 0; transform: translateY(14px); }
+
+/* Greeting + clock */
+.hello { font-size: 15px; color: var(--ink-2); margin-top: 18px; }
+.hello .wave { display: inline-block; transform-origin: 70% 70%; animation: wave 2.4s ease-in-out 1s 2; }
+@keyframes wave { 0%,60%,100% { transform: rotate(0); } 10%,30% { transform: rotate(14deg); } 20% { transform: rotate(-8deg); } 40% { transform: rotate(-4deg); } 50% { transform: rotate(10deg); } }
+.status { flex-wrap: wrap; }
+.status .sep { width: 1px; height: 14px; background: var(--line); }
+.status .clock { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+.hero h1 { margin-top: 8px; }
+
+/* Palette trigger */
+.kbd-btn { gap: 8px; padding: 0 10px 0 9px; color: var(--ink-2); }
+.kbd-btn kbd { font: 500 11px var(--mono); padding: 1px 5px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface-2); color: var(--ink-3); }
+@media (max-width: 820px) { .kbd-btn kbd { display: none; } }
+.brand span:last-child { white-space: nowrap; }
+@media (max-width: 440px) { .brand span:last-child { display: none; } }
+@media (max-width: 520px) { .status { border-radius: 14px; row-gap: 4px; } .status .sep { display: none; } .status .clock { flex-basis: 100%; padding-left: 18px; } }
+
+/* Command palette */
+.cmdk { position: fixed; inset: 0; z-index: 300; display: none; align-items: flex-start; justify-content: center; padding: 12vh 16px 16px; background: rgba(0,0,0,.38); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+.cmdk.open { display: flex; animation: fadeIn .14s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.cmdk-panel { width: 100%; max-width: 580px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 24px 60px rgba(0,0,0,.28); overflow: hidden; animation: pop .16s ease; }
+@keyframes pop { from { transform: translateY(-6px) scale(.985); opacity: 0; } to { transform: none; opacity: 1; } }
+.cmdk-search { display: flex; align-items: center; gap: 10px; padding: 0 16px; border-bottom: 1px solid var(--line); }
+.cmdk-search svg { width: 18px; height: 18px; color: var(--ink-3); flex: none; }
+.cmdk-search input { flex: 1; min-width: 0; height: 54px; border: 0; outline: 0; background: transparent; color: var(--ink); font: 400 16px var(--sans); }
+.cmdk-search kbd { font: 500 11px var(--mono); padding: 2px 6px; border: 1px solid var(--line); border-radius: 5px; color: var(--ink-3); }
+.cmdk-list { max-height: min(56vh, 420px); overflow-y: auto; padding: 8px; }
+.cmdk-group { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--ink-3); padding: 10px 10px 6px; }
+.cmdk-item { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px; border: 0; border-radius: 9px; background: transparent; color: var(--ink); font: 400 15px var(--sans); text-align: left; cursor: pointer; }
+.cmdk-item .ic { width: 28px; height: 28px; border-radius: 7px; background: var(--surface-2); border: 1px solid var(--line); display: grid; place-items: center; flex: none; color: var(--ink-2); }
+.cmdk-item .ic svg { width: 15px; height: 15px; }
+.cmdk-item small { margin-left: auto; color: var(--ink-3); font: 400 12px var(--mono); }
+.cmdk-item[aria-selected="true"] { background: var(--accent-soft); }
+.cmdk-item[aria-selected="true"] .ic { color: var(--accent-ink); border-color: transparent; background: var(--surface); }
+.cmdk-empty { padding: 28px 12px; text-align: center; color: var(--ink-3); }
+.cmdk-foot { display: flex; gap: 16px; padding: 10px 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-3); background: var(--surface-2); }
+.cmdk-foot kbd { font: 500 11px var(--mono); padding: 1px 5px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); margin-right: 4px; }
+
+/* Toast */
+.toast-wrap { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 400; display: grid; gap: 8px; pointer-events: none; width: max-content; max-width: calc(100vw - 32px); }
+.toast { display: flex; align-items: center; gap: 10px; background: var(--ink); color: var(--bg); padding: 12px 16px; border-radius: 12px; font-size: 14px; box-shadow: 0 12px 30px rgba(0,0,0,.25); animation: toastIn .22s ease; }
+.toast svg { width: 18px; height: 18px; color: var(--ok); flex: none; }
+.toast.out { animation: toastOut .2s ease forwards; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes toastOut { to { opacity: 0; transform: translateY(6px); } }
+
+/* Case study: live flow */
+.node { transition: border-color .25s, box-shadow .25s, transform .25s; cursor: default; }
+.node.lit { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); transform: translateX(4px); }
+.node.lit .node-n { background: var(--accent); color: #fff; }
+.edge.flowing::before { content: ''; position: absolute; left: -2px; top: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: drop .45s ease-in forwards; }
+@keyframes drop { from { top: -3px; opacity: 1; } to { top: 15px; opacity: .2; } }
+.flow-hint { font-size: 12.5px; color: var(--ink-3); }
+.flow-hint button { font: inherit; color: var(--accent-ink); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Backoffice dashboard */
+.dash { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.dash-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--line); background: var(--bg); flex-wrap: wrap; }
+.dash-title { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
+.live { display: inline-flex; align-items: center; gap: 6px; font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent); padding: 3px 8px; border-radius: 999px; }
+.live .dot { width: 6px; height: 6px; }
+.dash-meta { font: 400 12px var(--mono); color: var(--ink-3); display: flex; align-items: center; gap: 10px; }
+.icon-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); display: grid; place-items: center; cursor: pointer; }
+.icon-btn:hover { color: var(--ink); border-color: var(--ink-3); }
+.icon-btn svg { width: 15px; height: 15px; }
+.icon-btn.spin svg { animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.dash-body { display: grid; grid-template-columns: 1.4fr 1fr; }
+.dash-feed { padding: 8px 20px 16px; border-right: 1px solid var(--line); min-width: 0; }
+.dash-side { padding: 18px 20px 20px; display: grid; gap: 18px; align-content: start; }
+.dash h4 { margin: 10px 0 6px; font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--ink-3); }
+.feed-item { display: grid; grid-template-columns: 32px 1fr auto; gap: 12px; align-items: center; padding: 11px 0; border-bottom: 1px dashed var(--line); text-decoration: none; color: inherit; }
+.feed-item:last-child { border-bottom: 0; }
+.feed-item:hover b { color: var(--accent-ink); }
+.avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; background: var(--surface-2); display: block; }
+.feed-item b { font-weight: 600; transition: color .15s; }
+.feed-item p { font-size: 14px; color: var(--ink-2); line-height: 1.45; min-width: 0; overflow-wrap: anywhere; }
+.feed-item .lang { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--ink-3); margin-left: 6px; }
+.feed-item .lang i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.feed-item time { font: 400 12px var(--mono); color: var(--ink-3); white-space: nowrap; }
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.kpi { border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.kpi b { display: block; font: 600 22px/1.1 var(--serif); }
+.kpi span { font-size: 12px; color: var(--ink-3); }
+.langbar { display: flex; height: 8px; border-radius: 99px; overflow: hidden; background: var(--surface-2); margin: 4px 0 12px; gap: 2px; }
+.langbar i { display: block; height: 100%; transition: width .8s ease; }
+.langs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; font-size: 13px; color: var(--ink-2); }
+.langs li { display: flex; align-items: center; gap: 7px; }
+.langs li i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.langs li span { margin-left: auto; font: 400 12px var(--mono); color: var(--ink-3); }
+.sk { display: block; height: 12px; border-radius: 6px; background: linear-gradient(90deg, var(--surface-2), var(--line), var(--surface-2)); background-size: 200% 100%; animation: shimmer 1.2s linear infinite; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+.dash-empty { padding: 20px 0; color: var(--ink-3); font-size: 14px; }
+.dash-empty a { color: var(--accent-ink); }
+@media (max-width: 820px) { .dash-body { grid-template-columns: 1fr; } .dash-feed { border-right: 0; border-bottom: 1px solid var(--line); } }
+
+/* Contact form */
+.msg-form { margin-top: 12px; padding-top: 32px; border-top: 1px solid color-mix(in srgb, var(--bg) 16%, transparent); display: grid; gap: 14px; grid-column: 1 / -1; }
+.msg-form h3 { font-size: 17px; }
+.msg-form .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opt { height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); background: transparent; color: var(--bg); font: 500 13px var(--sans); cursor: pointer; transition: background .15s, color .15s; }
+.opt[aria-pressed="true"] { background: var(--bg); color: var(--ink); }
+.msg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field { display: grid; gap: 6px; }
+.field label { font: 400 12px var(--mono); color: color-mix(in srgb, var(--bg) 65%, transparent); }
+.field input, .field textarea { width: 100%; border: 1px solid color-mix(in srgb, var(--bg) 22%, transparent); background: color-mix(in srgb, var(--bg) 6%, transparent); color: var(--bg); border-radius: 10px; padding: 12px 14px; font: 400 15px var(--sans); resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--bg) 42%, transparent); }
+.field input:focus, .field textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+.field.err input, .field.err textarea { border-color: #F26B5B; }
+.msg-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.msg-actions .btn { background: var(--accent); color: #fff; border: 0; cursor: pointer; font-family: var(--sans); }
+.msg-actions small { color: color-mix(in srgb, var(--bg) 55%, transparent); font-size: 13px; }
+@media (max-width: 700px) { .msg-grid { grid-template-columns: 1fr; } }
 .reveal { transition: opacity .6s ease, transform .6s ease; }
 
 @media print {
-  header.top, .filters, .nav-tools, .ctas, .portrait-card { display: none !important; }
+  header.top, .filters, .nav-tools, .ctas, .cmdk, .toast-wrap, .dash, .msg-form, .flow-hint { display: none !important; }
   body { background: #fff; color: #000; }
   section { padding: 24px 0; break-inside: avoid; }
   .reveal.pending { opacity: 1; transform: none; }
@@ -298,6 +409,9 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
       <a href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="nav-tools">
+      <button class="tool-btn kbd-btn" id="cmdkBtn" type="button" aria-haspopup="dialog" aria-label="Recherche rapide (Ctrl K)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><kbd id="kbdHint">Ctrl K</kbd>
+      </button>
       <button class="tool-btn" id="langBtn" type="button" aria-label="Switch to English">EN</button>
       <button class="tool-btn" id="themeBtn" type="button" aria-label="Changer de thème">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -316,7 +430,8 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <span class="status"><span class="dot" aria-hidden="true"></span><span data-i18n="hero.status">Disponible · CDI ou freelance · Abidjan ou à distance</span></span>
+        <span class="status"><span class="dot" aria-hidden="true"></span><span data-i18n="hero.status">Disponible · CDI ou freelance</span><span class="sep" aria-hidden="true"></span><span class="clock" id="clock">Abidjan</span></span>
+        <p class="hello"><span id="greet">Bonjour</span> <span class="wave" aria-hidden="true">👋</span> <span data-i18n="hero.hello">Merci de passer par ici.</span></p>
         <h1 id="hero-title">Ibrahim Savadogo
           <span class="role" data-i18n="hero.role">Ingénieur logiciel <em>Full Stack</em>, du backend au mobile, de la donnée au capteur.</span>
         </h1>
@@ -332,7 +447,6 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
       </div>
       <div class="portrait">
         <div class="portrait-frame"><img src="photo_Ibrahim.jpg" alt="Portrait d'Ibrahim Savadogo" width="360" height="450" fetchpriority="high"></div>
-        <div class="portrait-card"><strong data-i18n="hero.card1">Master en informatique</strong><span data-i18n="hero.card2">Université Joseph Ki-Zerbo</span></div>
       </div>
     </div>
 
@@ -411,6 +525,7 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
           <div class="edge"></div>
           <div class="node"><span class="node-n">3</span><div><b data-i18n="c1.n3">Application Flutter</b><small data-i18n="c1.n3s">Tableau de bord, graphiques, carte, pilotage</small></div></div>
         </div>
+        <p class="flow-hint"><button type="button" class="play-flow" data-i18n="lbl.play">▶ Rejouer le flux</button> <span data-i18n="lbl.hover">ou survolez une étape</span></p>
       </div>
     </article>
 
@@ -438,6 +553,7 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
           <div class="edge"></div>
           <div class="node"><span class="node-n">4</span><div><b data-i18n="c2.n4">Rapport PDF + CSV</b><small data-i18n="c2.n4s">Généré à chaque exécution</small></div></div>
         </div>
+        <p class="flow-hint"><button type="button" class="play-flow" data-i18n="lbl.play">▶ Rejouer le flux</button> <span data-i18n="lbl.hover">ou survolez une étape</span></p>
       </div>
     </article>
 
@@ -463,6 +579,7 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
           <div class="edge"></div>
           <div class="node"><span class="node-n">3</span><div><b data-i18n="c3.n3">Consommateur e-mail</b><small data-i18n="c3.n3s">Envoi découplé et résilient</small></div></div>
         </div>
+        <p class="flow-hint"><button type="button" class="play-flow" data-i18n="lbl.play">▶ Rejouer le flux</button> <span data-i18n="lbl.hover">ou survolez une étape</span></p>
       </div>
     </article>
 
@@ -540,6 +657,37 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
         <p data-i18n="now2.d">Mise en relation de clients et de convoyeurs, avec offres de prix, suivi en temps réel et paiement Mobile Money. Cahier des charges et modèle de données rédigés.</p>
         <div class="chips" style="margin-top:14px"><span class="chip">Django REST</span><span class="chip">Channels</span><span class="chip">PostGIS</span><span class="chip">Redis</span><span class="chip">Flutter</span></div>
       </article>
+    </div>
+
+    <div class="dash reveal" id="dash">
+      <div class="dash-bar">
+        <div class="dash-title"><span data-i18n="dash.t">Activité GitHub</span><span class="live"><span class="dot" aria-hidden="true"></span><span data-i18n="dash.live">En direct</span></span></div>
+        <div class="dash-meta"><span id="dashUpdated"></span>
+          <button class="icon-btn" id="dashRefresh" type="button" aria-label="Actualiser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg></button>
+        </div>
+      </div>
+      <div class="dash-body">
+        <div class="dash-feed">
+          <h4 data-i18n="dash.recent">Derniers dépôts mis à jour</h4>
+          <div id="feed" aria-live="polite">
+            <div class="feed-item"><span class="avatar"></span><span><span class="sk" style="width:70%"></span></span><span class="sk" style="width:48px"></span></div>
+            <div class="feed-item"><span class="avatar"></span><span><span class="sk" style="width:55%"></span></span><span class="sk" style="width:48px"></span></div>
+            <div class="feed-item"><span class="avatar"></span><span><span class="sk" style="width:62%"></span></span><span class="sk" style="width:48px"></span></div>
+          </div>
+        </div>
+        <div class="dash-side">
+          <div class="kpis">
+            <div class="kpi"><b id="kRepos">–</b><span data-i18n="dash.k1">dépôts publics</span></div>
+            <div class="kpi"><b id="kLangs">–</b><span data-i18n="dash.k2">langages</span></div>
+            <div class="kpi"><b id="kLast">–</b><span data-i18n="dash.k3">dernier push</span></div>
+          </div>
+          <div>
+            <h4 data-i18n="dash.langs">Répartition par langage</h4>
+            <div class="langbar" id="langbar"></div>
+            <ul class="langs" id="langs"></ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -691,8 +839,8 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
         <p data-i18n="ct.d">Je suis ouvert à un poste en CDI ou à des missions freelance en développement backend Java, full stack Angular ou mobile Flutter. Je réponds sous 24 heures.</p>
       </div>
       <div class="contact-links">
-        <a href="mailto:savadogoibrahim0915@gmail.com"><span><small>E-mail</small><span class="v">savadogoibrahim0915@gmail.com</span></span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a href="mailto:savadogoibrahim0915@gmail.com" id="copyMail"><span><small data-i18n="ct.mail">E-mail · cliquer pour copier</small><span class="v">savadogoibrahim0915@gmail.com</span></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></a>
         <a href="https://www.linkedin.com/in/ibrahim-savadogo-70063128a" target="_blank" rel="noopener"><span><small>LinkedIn</small>Ibrahim Savadogo</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
         <a href="https://github.com/ibrahimsava" target="_blank" rel="noopener"><span><small>GitHub</small>@ibrahimsava</span>
@@ -700,11 +848,44 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
         <a href="CV.pdf" download><span><small>CV</small><span data-i18n="ct.cv">Télécharger en PDF</span></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
       </div>
+
+      <form class="msg-form" id="msgForm" novalidate>
+        <h3 data-i18n="form.t">Ou écrivez-moi directement</h3>
+        <div class="opts" role="group" aria-label="Type d'opportunité">
+          <button type="button" class="opt" aria-pressed="true" data-v="CDI">CDI</button>
+          <button type="button" class="opt" aria-pressed="false" data-v="Freelance">Freelance</button>
+          <button type="button" class="opt" aria-pressed="false" data-v="Stage" data-i18n="form.o3">Stage</button>
+          <button type="button" class="opt" aria-pressed="false" data-v="Autre" data-i18n="form.o4">Autre</button>
+        </div>
+        <div class="msg-grid">
+          <div class="field"><label for="fName" data-i18n="form.name">Votre nom et entreprise</label><input id="fName" name="name" autocomplete="name"></div>
+          <div class="field"><label for="fSubject" data-i18n="form.subject">Sujet</label><input id="fSubject" name="subject"></div>
+        </div>
+        <div class="field"><label for="fMsg" data-i18n="form.msg">Message</label><textarea id="fMsg" name="message" rows="4"></textarea></div>
+        <div class="msg-actions">
+          <button class="btn" type="submit"><span data-i18n="form.send">Envoyer le message</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+          <small data-i18n="form.note">Votre messagerie s'ouvre avec le message prérempli.</small>
+        </div>
+      </form>
     </div>
   </div>
 </section>
 
 </main>
+
+<div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Recherche rapide">
+  <div class="cmdk-panel">
+    <div class="cmdk-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="cmdkInput" type="text" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="cmdkList">
+      <kbd>Esc</kbd>
+    </div>
+    <div class="cmdk-list" id="cmdkList" role="listbox"></div>
+    <div class="cmdk-foot"><span><kbd>↑</kbd><kbd>↓</kbd><span data-i18n="k.nav">naviguer</span></span><span><kbd>↵</kbd><span data-i18n="k.open">ouvrir</span></span></div>
+  </div>
+</div>
+<div class="toast-wrap" id="toasts" aria-live="polite"></div>
 
 <footer>
   <div class="wrap foot">
@@ -807,11 +988,11 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
   var EN = {
     'skip': 'Skip to content',
     'nav.expertise': 'Expertise', 'nav.projects': 'Projects', 'nav.stack': 'Stack', 'nav.journey': 'Journey', 'nav.contact': 'Contact',
-    'hero.status': 'Available · Full-time or freelance · Abidjan or remote',
+    'hero.status': 'Available · Full-time or freelance',
+    'hero.hello': 'Thanks for stopping by.',
     'hero.role': '<em>Full Stack</em> software engineer, from backend to mobile, from data to sensors.',
     'hero.lede': 'I build complete, maintainable applications: Java / Spring Boot and Django APIs, Angular and Flutter interfaces, asynchronous processing with RabbitMQ, data pipelines and IoT systems. My goal is simple: ship software that holds up in production and serves the business.',
     'hero.cta1': 'See my projects', 'hero.cta2': 'Download my CV',
-    'hero.card1': "Master's in Computer Science", 'hero.card2': 'Joseph Ki-Zerbo University',
     'facts.1': 'domains covered: web, mobile, data, IoT', 'facts.2': 'public projects on GitHub',
     'facts.3': 'roles in research and engineering organisations', 'facts.4': 'working languages',
     'exp.kicker': 'What I bring', 'exp.title': 'An end-to-end view, from the database to the screen.',
@@ -881,8 +1062,19 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
     'tl5.1': 'A solid scientific foundation in modelling, measurement and quantitative reasoning.',
     'ct.kicker': 'Contact', 'ct.title': "Let's build something solid.",
     'ct.d': "I'm open to a full-time role or freelance work in Java backend, Angular full stack or Flutter mobile development. I reply within 24 hours.",
-    'ct.cv': 'Download as PDF', 'ft.top': 'Back to top ↑'
+    'ct.cv': 'Download as PDF', 'ft.top': 'Back to top ↑',
+    'lbl.play': '▶ Replay the flow', 'lbl.hover': 'or hover a step',
+    'dash.t': 'GitHub activity', 'dash.live': 'Live', 'dash.recent': 'Recently updated repositories',
+    'dash.k1': 'public repos', 'dash.k2': 'languages', 'dash.k3': 'last push', 'dash.langs': 'Breakdown by language',
+    'ct.mail': 'E-mail · click to copy',
+    'form.t': 'Or write to me directly', 'form.o3': 'Internship', 'form.o4': 'Other',
+    'form.name': 'Your name and company', 'form.subject': 'Subject', 'form.msg': 'Message',
+    'form.send': 'Send message', 'form.note': 'Your e-mail app opens with the message pre-filled.',
+    'k.nav': 'navigate', 'k.open': 'open'
   };
+  var langHooks = [];
+  function L() { return root.getAttribute('lang') === 'en' ? 'en' : 'fr'; }
+  function tr(fr, en) { return L() === 'en' ? en : fr; }
   var nodes = document.querySelectorAll('[data-i18n]');
   var FR = {};
   nodes.forEach(function (n) { FR[n.getAttribute('data-i18n')] = n.innerHTML; });
@@ -899,7 +1091,291 @@ footer { padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
     langBtn.textContent = meta[lang].btn;
     langBtn.setAttribute('aria-label', meta[lang].aria);
     store.set('lang', lang);
+    langHooks.forEach(function (fn) { fn(lang); });
   }
+
+  /* ---------- Toasts ---------- */
+  var toastWrap = document.getElementById('toasts');
+  function toast(msg) {
+    var el = document.createElement('div');
+    el.className = 'toast';
+    el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span></span>';
+    el.querySelector('span').textContent = msg;
+    toastWrap.appendChild(el);
+    setTimeout(function () { el.classList.add('out'); setTimeout(function () { el.remove(); }, 220); }, 2600);
+  }
+
+  /* ---------- Greeting + Abidjan clock ---------- */
+  var greetEl = document.getElementById('greet');
+  var clockEl = document.getElementById('clock');
+  function renderHuman() {
+    var h = new Date().getHours();
+    greetEl.textContent = h >= 5 && h < 12 ? tr('Bonjour', 'Good morning')
+      : h >= 12 && h < 18 ? tr('Bonjour', 'Good afternoon') : tr('Bonsoir', 'Good evening');
+    var time;
+    try { time = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Abidjan' }).format(new Date()); }
+    catch (e) { var d = new Date(); time = ('0' + d.getUTCHours()).slice(-2) + ':' + ('0' + d.getUTCMinutes()).slice(-2); }
+    clockEl.textContent = tr('Il est ' + time + ' à Abidjan', "It's " + time + ' in Abidjan');
+  }
+  renderHuman();
+  setInterval(renderHuman, 30000);
+  langHooks.push(renderHuman);
+
+  /* ---------- Case studies: animated flow ---------- */
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.case').forEach(function (cs) {
+    var steps = Array.prototype.slice.call(cs.querySelectorAll('.flow > .node, .flow > .edge'));
+    var nodesEls = cs.querySelectorAll('.flow > .node');
+    var timer = null;
+    function clear() { steps.forEach(function (s) { s.classList.remove('lit', 'flowing'); }); }
+    function play() {
+      clearTimeout(timer); clear();
+      var i = 0;
+      (function next() {
+        if (i > 0) steps[i - 1].classList.remove('lit');
+        if (i >= steps.length) { timer = setTimeout(clear, 400); return; }
+        var s = steps[i];
+        if (s.classList.contains('edge')) { s.classList.remove('flowing'); void s.offsetWidth; s.classList.add('flowing'); }
+        else s.classList.add('lit');
+        i++;
+        timer = setTimeout(next, s.classList.contains('edge') ? 420 : 650);
+      })();
+    }
+    cs.querySelector('.play-flow').addEventListener('click', play);
+    nodesEls.forEach(function (n) {
+      n.addEventListener('mouseenter', function () { clearTimeout(timer); clear(); n.classList.add('lit'); });
+      n.addEventListener('mouseleave', function () { n.classList.remove('lit'); });
+    });
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (en) {
+        if (en[0].isIntersecting) { io.disconnect(); setTimeout(play, 350); }
+      }, { threshold: 0.55 });
+      io.observe(cs.querySelector('.case-visual'));
+    }
+  });
+
+  /* ---------- Copy e-mail ---------- */
+  var EMAIL = 'savadogoibrahim0915@gmail.com';
+  function copyEmail() {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(EMAIL).then(function () {
+        toast(tr('Adresse e-mail copiée', 'E-mail address copied'));
+        return true;
+      }, function () { return false; });
+    }
+    return Promise.resolve(false);
+  }
+  document.getElementById('copyMail').addEventListener('click', function (e) {
+    e.preventDefault();
+    copyEmail().then(function (ok) { if (!ok) window.location.href = 'mailto:' + EMAIL; });
+  });
+
+  /* ---------- Contact form (mailto) ---------- */
+  var form = document.getElementById('msgForm');
+  var fName = document.getElementById('fName'), fSubject = document.getElementById('fSubject'), fMsg = document.getElementById('fMsg');
+  var opts = form.querySelectorAll('.opt');
+  opts.forEach(function (o) {
+    o.addEventListener('click', function () { opts.forEach(function (x) { x.setAttribute('aria-pressed', x === o ? 'true' : 'false'); }); });
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = fName.value.trim(), subj = fSubject.value.trim(), msg = fMsg.value.trim();
+    fName.parentNode.classList.toggle('err', !name);
+    fMsg.parentNode.classList.toggle('err', !msg);
+    if (!name || !msg) { toast(tr('Ajoutez votre nom et un message', 'Please add your name and a message')); (name ? fMsg : fName).focus(); return; }
+    var type = form.querySelector('.opt[aria-pressed="true"]').getAttribute('data-v');
+    var subject = '[' + type + '] ' + (subj || tr('Contact depuis le portfolio', 'Contact from portfolio')) + ' · ' + name;
+    var body = msg + '\n\n' + name;
+    window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    toast(tr('Votre messagerie s\u2019ouvre, merci !', 'Opening your e-mail app, thank you!'));
+  });
+  form.addEventListener('input', function (e) { if (e.target.parentNode) e.target.parentNode.classList.remove('err'); });
+
+  /* ---------- GitHub dashboard ---------- */
+  var GH_USER = 'ibrahimsava';
+  var COLORS = { Java: '#b07219', Python: '#3572A5', Dart: '#00B4AB', HTML: '#e34c26', 'C++': '#f34b7d', TypeScript: '#3178c6', JavaScript: '#f1e05a', CSS: '#663399', C: '#555555', Kotlin: '#A97BFF' };
+  var feedEl = document.getElementById('feed');
+  var dashData = null, fetchedAt = null;
+  function daysAgo(iso) { return Math.max(0, Math.floor((Date.now() - new Date(iso).getTime()) / 86400000)); }
+  function rel(iso) {
+    var d = daysAgo(iso);
+    try {
+      var rtf = new Intl.RelativeTimeFormat(L(), { numeric: 'auto' });
+      if (d < 1) { var h = Math.floor((Date.now() - new Date(iso).getTime()) / 3600000); return h < 1 ? tr('à l\u2019instant', 'just now') : rtf.format(-h, 'hour'); }
+      if (d < 30) return rtf.format(-d, 'day');
+      if (d < 365) return rtf.format(-Math.floor(d / 30), 'month');
+      return rtf.format(-Math.floor(d / 365), 'year');
+    } catch (e) { return d + (L() === 'en' ? 'd' : ' j'); }
+  }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
+  function renderDash() {
+    var upd = document.getElementById('dashUpdated');
+    if (!dashData) return;
+    if (dashData.error) {
+      feedEl.innerHTML = '<p class="dash-empty">' + tr('Impossible de charger l\u2019activité pour le moment.', 'Activity could not be loaded right now.') +
+        ' <a href="https://github.com/' + GH_USER + '" target="_blank" rel="noopener">' + tr('Voir sur GitHub', 'View on GitHub') + ' ↗</a></p>';
+      upd.textContent = '';
+      return;
+    }
+    var repos = dashData.repos;
+    var avatar = repos.length ? repos[0].owner.avatar_url + '&s=64' : '';
+    feedEl.innerHTML = repos.slice(0, 5).map(function (r) {
+      var lang = r.language ? '<span class="lang"><i style="background:' + (COLORS[r.language] || '#8b8b8b') + '"></i>' + esc(r.language) + '</span>' : '';
+      return '<a class="feed-item" href="' + esc(r.html_url) + '" target="_blank" rel="noopener">' +
+        '<img class="avatar" src="' + esc(avatar) + '" alt="" loading="lazy" width="32" height="32">' +
+        '<p><b>Ibrahim</b> ' + tr('a mis à jour', 'updated') + ' <b>' + esc(r.name) + '</b>' + lang + '</p>' +
+        '<time datetime="' + esc(r.pushed_at) + '">' + esc(rel(r.pushed_at)) + '</time></a>';
+    }).join('');
+    var counts = {};
+    repos.forEach(function (r) { if (r.language) counts[r.language] = (counts[r.language] || 0) + 1; });
+    var langs = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
+    var total = langs.reduce(function (s, k) { return s + counts[k]; }, 0) || 1;
+    document.getElementById('kRepos').textContent = dashData.total;
+    document.getElementById('kLangs').textContent = langs.length;
+    var d = repos.length ? daysAgo(repos[0].pushed_at) : 0;
+    document.getElementById('kLast').textContent = d === 0 ? tr('Auj.', 'Today') : d === 1 ? tr('Hier', 'Yday') : (L() === 'en' ? d + 'd' : d + ' j');
+    document.getElementById('langbar').innerHTML = langs.map(function (k) {
+      return '<i style="width:' + (counts[k] / total * 100).toFixed(1) + '%;background:' + (COLORS[k] || '#8b8b8b') + '" title="' + esc(k) + '"></i>';
+    }).join('');
+    document.getElementById('langs').innerHTML = langs.slice(0, 8).map(function (k) {
+      return '<li><i style="background:' + (COLORS[k] || '#8b8b8b') + '"></i>' + esc(k) + '<span>' + Math.round(counts[k] / total * 100) + '%</span></li>';
+    }).join('');
+    var tm = new Intl.DateTimeFormat(L() === 'en' ? 'en-GB' : 'fr-FR', { hour: '2-digit', minute: '2-digit' }).format(fetchedAt);
+    upd.textContent = tr('Mis à jour à ', 'Updated at ') + tm;
+  }
+  function loadDash(force) {
+    var btn = document.getElementById('dashRefresh');
+    if (!force) {
+      try {
+        var c = JSON.parse(sessionStorage.getItem('gh-dash') || 'null');
+        if (c && Date.now() - c.at < 600000) { dashData = c.data; fetchedAt = new Date(c.at); renderDash(); return; }
+      } catch (e) {}
+    }
+    btn.classList.add('spin');
+    fetch('https://api.github.com/users/' + GH_USER + '/repos?per_page=100&sort=pushed', { headers: { Accept: 'application/vnd.github+json' } })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (list) {
+        var own = list.filter(function (r) { return !r.fork; });
+        var feed = own.filter(function (r) { return r.name !== GH_USER; })
+          .sort(function (a, b) { return new Date(b.pushed_at) - new Date(a.pushed_at); })
+          .map(function (r) { return { name: r.name, html_url: r.html_url, language: r.language, pushed_at: r.pushed_at, owner: { avatar_url: r.owner.avatar_url } }; });
+        dashData = { total: own.length, repos: feed };
+        fetchedAt = new Date();
+        try { sessionStorage.setItem('gh-dash', JSON.stringify({ at: fetchedAt.getTime(), data: dashData })); } catch (e) {}
+        renderDash();
+        if (force) toast(tr('Activité actualisée', 'Activity refreshed'));
+      })
+      .catch(function () { if (!dashData || dashData.error) { dashData = { error: true }; renderDash(); } })
+      .then(function () { btn.classList.remove('spin'); });
+  }
+  document.getElementById('dashRefresh').addEventListener('click', function () { loadDash(true); });
+  var dashStarted = false;
+  function startDash() { if (!dashStarted) { dashStarted = true; loadDash(false); } }
+  if ('IntersectionObserver' in window) {
+    var dio = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { dio.disconnect(); startDash(); } }, { rootMargin: '400px' });
+    dio.observe(document.getElementById('dash'));
+  }
+  window.addEventListener('load', function () { setTimeout(startDash, 1500); });
+  langHooks.push(renderDash);
+
+  /* ---------- Command palette ---------- */
+  var ICONS = {
+    nav: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    proj: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/>',
+    ext: '<path d="M7 17 17 7M8 7h9v9"/>',
+    copy: '<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>',
+    dl: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
+    theme: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
+    lang: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+    mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>'
+  };
+  var cmdk = document.getElementById('cmdk');
+  var cmdkInput = document.getElementById('cmdkInput');
+  var cmdkList = document.getElementById('cmdkList');
+  var cmdkBtn = document.getElementById('cmdkBtn');
+  var isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  if (isMac) document.getElementById('kbdHint').textContent = '⌘K';
+  var items = [], sel = 0, lastFocus = null;
+  function goTo(el) { if (el) el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); }
+  function buildItems() {
+    var list = [];
+    var G1 = tr('Navigation', 'Navigation'), G2 = tr('Projets', 'Projects'), G3 = tr('Actions', 'Actions');
+    [['#expertise', tr('Expertise', 'Expertise')], ['#projets', tr('Projets', 'Projects')],
+     ['#now-title', tr('En ce moment', 'Right now')], ['#stack', 'Stack'], ['#parcours', tr('Parcours', 'Journey')], ['#contact', 'Contact']]
+      .forEach(function (s) {
+        list.push({ g: G1, icon: 'nav', label: s[1], run: function () { var el = document.querySelector(s[0]); goTo(s[0] === '#now-title' ? el.closest('section') : el); } });
+      });
+    document.querySelectorAll('.case').forEach(function (cs) {
+      list.push({ g: G2, icon: 'proj', label: cs.querySelector('h3').textContent, hint: tr('étude de cas', 'case study'),
+        kw: cs.querySelector('.chips').textContent, run: function () { goTo(cs); } });
+    });
+    document.querySelectorAll('#projectGrid .card').forEach(function (c) {
+      list.push({ g: G2, icon: 'ext', label: c.querySelector('h4').textContent, hint: 'GitHub',
+        kw: c.querySelector('.chips').textContent, run: function () { window.open(c.href, '_blank', 'noopener'); } });
+    });
+    list.push({ g: G3, icon: 'copy', label: tr('Copier mon adresse e-mail', 'Copy my e-mail address'), kw: 'mail email contact', run: function () { copyEmail().then(function (ok) { if (!ok) window.location.href = 'mailto:' + EMAIL; }); } });
+    list.push({ g: G3, icon: 'mail', label: tr('M\u2019écrire un message', 'Write me a message'), kw: 'contact form formulaire', run: function () { goTo(form); setTimeout(function () { fName.focus({ preventScroll: true }); }, 450); } });
+    list.push({ g: G3, icon: 'dl', label: tr('Télécharger mon CV', 'Download my CV'), kw: 'cv resume pdf', run: function () { var a = document.createElement('a'); a.href = 'CV.pdf'; a.download = ''; document.body.appendChild(a); a.click(); a.remove(); toast(tr('Téléchargement du CV…', 'Downloading CV…')); } });
+    list.push({ g: G3, icon: 'theme', label: tr('Changer de thème', 'Toggle theme'), kw: 'dark light sombre clair', run: function () { themeBtn.click(); } });
+    list.push({ g: G3, icon: 'lang', label: tr('Switch to English', 'Passer en français'), kw: 'langue language', run: function () { langBtn.click(); } });
+    list.push({ g: G3, icon: 'ext', label: tr('Ouvrir mon GitHub', 'Open my GitHub'), hint: 'github.com', run: function () { window.open('https://github.com/' + GH_USER, '_blank', 'noopener'); } });
+    list.push({ g: G3, icon: 'ext', label: tr('Ouvrir mon LinkedIn', 'Open my LinkedIn'), hint: 'linkedin.com', run: function () { window.open('https://www.linkedin.com/in/ibrahim-savadogo-70063128a', '_blank', 'noopener'); } });
+    return list;
+  }
+  function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+  function renderList() {
+    var q = norm(cmdkInput.value.trim());
+    var all = buildItems();
+    items = all.filter(function (it) { return !q || norm(it.label + ' ' + (it.kw || '') + ' ' + (it.hint || '')).indexOf(q) !== -1; });
+    if (sel >= items.length) sel = Math.max(0, items.length - 1);
+    if (!items.length) { cmdkList.innerHTML = '<div class="cmdk-empty">' + tr('Aucun résultat', 'No results') + '</div>'; return; }
+    var html = '', lastG = null;
+    items.forEach(function (it, i) {
+      if (it.g !== lastG) { html += '<div class="cmdk-group" role="presentation">' + esc(it.g) + '</div>'; lastG = it.g; }
+      html += '<button type="button" class="cmdk-item" role="option" id="ck' + i + '" data-i="' + i + '" aria-selected="' + (i === sel) + '">' +
+        '<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[it.icon] + '</svg></span>' +
+        '<span>' + esc(it.label) + '</span>' + (it.hint ? '<small>' + esc(it.hint) + '</small>' : '') + '</button>';
+    });
+    cmdkList.innerHTML = html;
+    cmdkInput.setAttribute('aria-activedescendant', 'ck' + sel);
+  }
+  function setSel(i) {
+    if (!items.length) return;
+    sel = (i + items.length) % items.length;
+    cmdkList.querySelectorAll('.cmdk-item').forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-i') == sel ? 'true' : 'false'); });
+    var cur = document.getElementById('ck' + sel);
+    if (cur) cur.scrollIntoView({ block: 'nearest' });
+    cmdkInput.setAttribute('aria-activedescendant', 'ck' + sel);
+  }
+  function openCmdk() {
+    lastFocus = document.activeElement;
+    cmdkInput.placeholder = tr('Rechercher un projet, une section, une action…', 'Search a project, a section, an action…');
+    cmdkInput.value = ''; sel = 0; renderList();
+    cmdk.classList.add('open'); document.body.style.overflow = 'hidden';
+    setTimeout(function () { cmdkInput.focus(); }, 10);
+  }
+  function closeCmdk() {
+    cmdk.classList.remove('open'); document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  function runSel(i) { var it = items[i]; if (!it) return; closeCmdk(); setTimeout(it.run, 30); }
+  cmdkBtn.addEventListener('click', openCmdk);
+  cmdk.addEventListener('mousedown', function (e) { if (e.target === cmdk) closeCmdk(); });
+  cmdkInput.addEventListener('input', function () { sel = 0; renderList(); });
+  cmdkList.addEventListener('click', function (e) { var b = e.target.closest('.cmdk-item'); if (b) runSel(+b.getAttribute('data-i')); });
+  cmdkList.addEventListener('mousemove', function (e) { var b = e.target.closest('.cmdk-item'); if (b && +b.getAttribute('data-i') !== sel) setSel(+b.getAttribute('data-i')); });
+  document.addEventListener('keydown', function (e) {
+    var open = cmdk.classList.contains('open');
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open ? closeCmdk() : openCmdk(); return; }
+    if (!open && e.key === '/' && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); openCmdk(); return; }
+    if (!open) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeCmdk(); }
+    else if (e.key === 'ArrowDown') { e.preventDefault(); setSel(sel + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setSel(sel - 1); }
+    else if (e.key === 'Enter') { e.preventDefault(); runSel(sel); }
+    else if (e.key === 'Tab') { e.preventDefault(); cmdkInput.focus(); }
+  });
+
   langBtn.addEventListener('click', function () { setLang(root.getAttribute('lang') === 'en' ? 'fr' : 'en'); });
   var initial = store.get('lang') || ((navigator.language || 'fr').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en');
   if (initial === 'en') setLang('en');
